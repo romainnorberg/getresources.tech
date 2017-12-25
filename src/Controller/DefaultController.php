@@ -16,6 +16,14 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('default/index.html.twig');
+        $response = $this->render('default/index.html.twig');
+
+        // cache for 3600 seconds
+        $response->setSharedMaxAge(3600);
+
+        // (optional) set a custom Cache-Control directive
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+
+        return $response;
     }
 }

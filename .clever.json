@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "app_id": "app_b7344abb-f3fa-41cf-ac5f-03ca5d4125f2",
+      "deploy_url": "https://github.com/romainnorberg/getresources.tech.git",
+      "name": "getresources.tech (staging)",
+      "alias": "getresources-tech-staging-"
+    }
+  ]
+}
