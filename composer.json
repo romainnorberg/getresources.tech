@@ -9,11 +9,12 @@
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.0",
         "symfony/lts": "^4@dev",
+        "symfony/profiler-pack": "^1.0",
+        "symfony/twig-bundle": "^4.0",
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
-        "symfony/dotenv": "^4.0",
-        "symfony/thanks": "^1.0"
+        "symfony/dotenv": "^4.0"
     },
     "config": {
         "preferred-install": {
@@ -57,5 +58,6 @@
             "id": "01C26YDBEESY5TVAVAS68B6EH2",
             "allow-contrib": false
         }
-    }
+    },
+    "apcu-autoloader": true
 }

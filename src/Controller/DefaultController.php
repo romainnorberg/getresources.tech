@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController
+class DefaultController extends AbstractController
 {
     /**
      * @Route("/")
@@ -15,6 +16,6 @@ class DefaultController
      */
     public function index(): Response
     {
-        return new Response('Homepage');
+        return $this->render('default/index.html.twig');
     }
 }
