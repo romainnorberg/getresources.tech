@@ -7,7 +7,7 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class CompressionListener implements EventSubscriberInterface
+class ResponseListener implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array
     {
@@ -18,8 +18,6 @@ class CompressionListener implements EventSubscriberInterface
 
     public function onKernelResponse(FilterResponseEvent $event)
     {
-        //return;
-
         if ($event->getRequestType() !== HttpKernelInterface::MASTER_REQUEST) {
             return;
         }
@@ -28,6 +26,7 @@ class CompressionListener implements EventSubscriberInterface
         $response = $event->getResponse();
         $encodings = $request->getEncodings();
 
+        // Compression
         if (\in_array('gzip', $encodings, true) && \function_exists('gzencode')) {
             $content = gzencode($response->getContent());
             $response->setContent($content);
@@ -37,5 +36,11 @@ class CompressionListener implements EventSubscriberInterface
             $response->setContent($content);
             $response->headers->set('Content-encoding', 'deflate');
         }
+
+        // Cache control
+        $response->setPublic();
+        $response->setMaxAge(600);
+        $response->setSharedMaxAge(600);
+        $response->headers->addCacheControlDirective('must-revalidate');
     }
 }
