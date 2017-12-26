@@ -1,0 +1,44 @@
+# Project language
+language: php
+
+# Allows use container-based infrastructure
+sudo: false
+
+# Start mysql service
+services:
+  - mysql
+  - redis-server
+
+# Host (https://docs.travis-ci.com/user/hosts)
+addons:
+  hosts:
+    - getresources.local
+
+# Cache composer packages so "composer install" is faster
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+# Matrix to test in every php version
+matrix:
+  include:
+    - php: 7.1
+    - php: 7.2
+
+# Update composer
+before-install:
+  - composer self-update
+
+# Install composer dependencies,
+# Create database, schema and fixtures
+install:
+  - composer install --no-progress
+
+# Run script
+script:
+  - echo `pwd`
+  - php bin/phpunit
+
+# After a build, send email notification with the build results
+notifications:
+  email: hello@getresources.tech
