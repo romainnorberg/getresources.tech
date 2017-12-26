@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900")
+
+*
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  text-rendering: optimizeLegibility
+
+body
+  font-family: "Montserrat", Helvetica, Arial, sans-serif
+
+.bd-tw-button
+  background-color: #55acee
+  color: white
+  border-color: transparent !important
+
+.bd-tw-button:hover
+  background-color: #49a6ed
+  color: white
+
+.bd-tw-button:active, .bd-tw-button:focus
+  background-color: #3ea1ec
+  color: white
+
+h2
+  &.line
+    display: grid
+    grid-template-columns: 1fr auto 1fr
+    grid-gap: 20px
+    align-items: center
+    &:before, &:after
+      background: #ccc
+      display: block
+      height: 2px
+      width: 100%
+      content: ''
+footer
+  a.algolia-thanks
+    img
+      width: 120px
+
+/* Components */
+/*  |- Navbar */
+.navbar
+  position: relative
+  z-index: 800
+  div.navbar-brand
+    h1
+      .img
+        width: 36px
+        height: 36px
+        background: transparent no-repeat center
+        background-size: 40px
+        display: inline-block
+        position: absolute
+        margin-top: 10px
+      a
+        margin: 3px 0 3px 45px
+        padding: 3px 0
+        color: #fff
+        text-shadow: 0 0 40px rgba(0, 0, 0, 0.3)
+        font-size: 2.0rem
+        position: relative
+        font-weight: 400
+        letter-spacing: -0.05em
+        .extention
+          color: $grey-lighter
+      .beta
+        margin-left: 10px
+        letter-spacing: 0px
+
+/*  |- Card */
+.card
+  height: 100%
+
+/* Elements */
+/*  |- Tags */

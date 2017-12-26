@@ -6,9 +6,20 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class ResponseListener implements EventSubscriberInterface
 {
+    /**
+     * @var KernelInterface
+     */
+    private $kernel;
+
+    public function __construct(KernelInterface $kernel)
+    {
+        $this->kernel = $kernel;
+    }
+
     public static function getSubscribedEvents(): array
     {
         return [
@@ -38,9 +49,11 @@ class ResponseListener implements EventSubscriberInterface
         }
 
         // Cache control
-        $response->setPublic();
-        $response->setMaxAge(600);
-        $response->setSharedMaxAge(600);
-        $response->headers->addCacheControlDirective('must-revalidate');
+        if($this->kernel->getEnvironment() === 'prod') {
+            $response->setPublic();
+            $response->setMaxAge(600);
+            $response->setSharedMaxAge(600);
+            $response->headers->addCacheControlDirective('must-revalidate');
+        }
     }
 }
