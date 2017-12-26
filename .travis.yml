@@ -9,6 +9,19 @@ services:
   - mysql
   - redis-server
 
+php:
+  - 7.1
+  - 7.2
+  - master
+
+# Env
+env:
+  matrix:
+    - DEPENDENCIES="high"
+    - DEPENDENCIES="low"
+  global:
+    - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-ansi --no-progress --no-suggest"
+
 # Host (https://docs.travis-ci.com/user/hosts)
 addons:
   hosts:
@@ -19,25 +32,23 @@ cache:
   directories:
     - $HOME/.composer/cache/files
 
-# Matrix to test in every php version
-matrix:
-  include:
-    - php: 7.1
-    - php: 7.2
-
 # Update composer
 before-install:
   - composer self-update
+  - composer clear-cache
 
-# Install composer dependencies,
-# Create database, schema and fixtures
+# Install
 install:
-  - composer install --no-progress
+  - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS; fi
+  - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
 
 # Run script
 script:
   - echo `pwd`
-  - php bin/phpunit
+  - php bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 # After a build, send email notification with the build results
 notifications:
