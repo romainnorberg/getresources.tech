@@ -36,7 +36,7 @@ class ResponseListenerTest extends TestCase
     /**
      * @dataProvider urlProvider
      *
-     * @covers       ResponseListener::onKernelResponse()
+     * @covers       ResponseListener::onKernelResponse
      *
      * @param string $value
      * @param        $expected
