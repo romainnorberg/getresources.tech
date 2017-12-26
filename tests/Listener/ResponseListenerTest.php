@@ -58,6 +58,28 @@ class ResponseListenerTest extends TestCase
         $this->assertEquals($expected, $response->headers->get('Content-encoding'));
     }
 
+    /**
+     * Listener'processing is ignored if the request type of the kernel is not an master request
+     *
+     * @covers       \App\EventListener\ResponseListener::onKernelResponse
+     */
+    public function testKernelSubRequest()
+    {
+        $listener = new ResponseListener($this->kernel);
+        $this->dispatcher->addListener(KernelEvents::RESPONSE, [$listener, 'onKernelResponse'], 1);
+
+        $response = new Response('foo');
+        $server = [
+            'HTTP_ACCEPT_ENCODING' => 'gzip',
+        ];
+        $request = Request::create('/', $method = 'GET', $parameters = [], $cookies = [], $files = [], $server, $content = null);
+
+        $event = new FilterResponseEvent($this->kernel, $request, HttpKernelInterface::SUB_REQUEST, $response);
+        $this->dispatcher->dispatch(KernelEvents::RESPONSE, $event);
+
+        $this->assertEquals(null, $response->headers->get('Content-encoding'));
+    }
+
     public function encodingTypeProvider()
     {
         yield 'empty' => [

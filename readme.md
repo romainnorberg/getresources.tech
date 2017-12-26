@@ -1,3 +1,9 @@
+[![Build Status](https://travis-ci.org/romainnorberg/getresources.tech.svg?branch=master)](https://travis-ci.org/romainnorberg/getresources.tech)
+[![codecov](https://codecov.io/gh/romainnorberg/getresources.tech/branch/master/graph/badge.svg)](https://codecov.io/gh/romainnorberg/getresources.tech)
+[![BCH compliance](https://bettercodehub.com/edge/badge/romainnorberg/getresources.tech?branch=master)](https://bettercodehub.com/)
+
+***
+
 ### Requirements:
 - Yarn (`brew install yarn`)
 
