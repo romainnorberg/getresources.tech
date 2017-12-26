@@ -29,4 +29,4 @@ services:
     App\EventListener\ResponseListener:
         arguments: ["@kernel"]
         tags:
-            - { name: kernel.event_subscriber }
+            - { name: kernel.response_listener, event: kernel.response }
