@@ -34,9 +34,9 @@ class ResponseListenerTest extends TestCase
     }
 
     /**
-     * @dataProvider urlProvider
+     * @dataProvider encodingTypeProvider
      *
-     * @covers       ResponseListener::onKernelResponse
+     * @covers       \App\EventListener\ResponseListener::onKernelResponse
      *
      * @param string $value
      * @param        $expected
@@ -58,7 +58,7 @@ class ResponseListenerTest extends TestCase
         $this->assertEquals($expected, $response->headers->get('Content-encoding'));
     }
 
-    public function urlProvider()
+    public function encodingTypeProvider()
     {
         yield 'empty' => [
             null,

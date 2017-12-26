@@ -49,7 +49,7 @@ class ResponseListener implements EventSubscriberInterface
         }
 
         // Cache control
-        if($this->kernel->getEnvironment() === 'prod') {
+        if ($this->kernel->getEnvironment() === 'prod') {
             $response->setPublic();
             $response->setMaxAge(600);
             $response->setSharedMaxAge(600);
