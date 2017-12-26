@@ -1,5 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block navbar %}{% endblock %}
+
 {% block body %}
-    Test Homepage. (Env:{{ app.environment }})
+    <section class="hero is-primary is-medium">
+        <div class="hero-head">
+            {% include 'includes/navbar.html.twig' %}
+        </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                Test Homepage. (Env:{{ app.environment }})
+            </div>
+        </div>
+    </section>
 {% endblock %}

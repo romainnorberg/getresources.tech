@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="/build/css/app.css" >
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+{% include 'includes/header.html.twig' %}
+
+{% block navbar %}
+    <div class="section hero is-primary is-medium">
+        <div class="hero-head">
+            {% include 'includes/navbar.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}{% endblock %}
+
+{% include 'includes/footer.html.twig' %}

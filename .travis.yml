@@ -10,8 +10,7 @@ services:
   - redis-server
 
 php:
-  - 7.1
-  #- 7.2
+  - 7.2
   #- master
 
 # Env

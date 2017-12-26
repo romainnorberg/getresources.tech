@@ -21,3 +21,7 @@ doc: http://symfony.com/doc/current/frontend.html
 - `yarn run encore dev`
 - `yarn run encore dev --watch`
 - `yarn run encore production`
+
+### Tests
+- `php bin/phpunit`
+- (optionnal) `php bin/phpunit --coverage-clover=coverage.xml`
