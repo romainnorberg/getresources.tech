@@ -3,7 +3,7 @@
 import io from './../../node_modules/socket.io-client/';
 
 //let serverUrl = 'http://getresources.local/';
-let serverUrl = 'https://app-6d6f85f6-777c-46b6-be0c-0f373caf31de.cleverapps.io/';
+let serverUrl = 'https://server-staging.getresources.tech/';
 
 const socket = io(serverUrl);
 
