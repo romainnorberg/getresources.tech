@@ -11,6 +11,7 @@
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.0",
         "symfony/twig-bundle": "^4.0",
+        "symfony/web-link": "^4.0",
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
@@ -50,6 +51,7 @@
             "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
+            "npm install",
             "@auto-scripts"
         ],
         "post-update-cmd": [

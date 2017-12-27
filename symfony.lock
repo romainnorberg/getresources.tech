@@ -23,10 +23,16 @@
     "doctrine/lexer": {
         "version": "v1.0.1"
     },
+    "fig/link-util": {
+        "version": "1.0.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
     "psr/container": {
+        "version": "1.0.0"
+    },
+    "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
@@ -159,6 +165,9 @@
         }
     },
     "symfony/var-dumper": {
+        "version": "v4.0.2"
+    },
+    "symfony/web-link": {
         "version": "v4.0.2"
     },
     "symfony/web-profiler-bundle": {

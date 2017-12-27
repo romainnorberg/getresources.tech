@@ -1,4 +1,40 @@
-    <script src="{{ asset('build/js/app.js') }}"></script>
-    {% block javascripts %}{% endblock %}
+<footer class="footer has-text-centered">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-8-desktop is-offset-2-desktop">
+                <p><strong class="has-text-weight-bold">© getresources.tech</strong></p>
+                <p>
+                    <small>Find all tech resources, search and filter by language, type and more.</small>
+                </p>
+                <a href="https://www.algolia.com" target="blank" class="algolia-thanks">
+                    <img src="{{ asset_static_url }}/assets/images/search/search-by-algolia.svg"/>
+                </a>
+                <hr>
+                <p><i class="fa fa-twitter is-small"></i><a href="https://twitter.com/getresources_t" target="_blank">&nbsp;Twitter
+                        @getresources_t</a> | &nbsp;<i class="fa fa-envelope is-small"></i><span>&nbsp;&#104;&#101;&#108;&#108;&#111;&#064;&#103;&#101;&#116;&#114;&#101;&#115;&#111;&#117;&#114;&#099;&#101;&#115;&#046;&#116;&#101;&#099;&#104;</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+  window.twttr = (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    t._e = [];
+    t.ready = function (f) {
+      t._e.push(f);
+    };
+    return t;
+  }(document, "script", "twitter-wjs"));
+</script>
+
+<script src="{{ preload(asset('build/js/app.js')) }}"></script>
+{% block javascripts %}{% endblock %}
 </body>
 </html>
