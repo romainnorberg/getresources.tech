@@ -43,7 +43,7 @@ install:
 
 before_script:
   - echo `pwd`
-  - mysql -u root -e 'CREATE DATABASE ${DATABASE_DB};'
+  - mysql -u root -e "CREATE DATABASE \`${DATABASE_DB}\`;"
   - php bin/console doctrine:schema:create
   - php bin/console doctrine:schema:validate
 
