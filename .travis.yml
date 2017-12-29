@@ -41,11 +41,14 @@ install:
   - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS; fi
   - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
 
-# Run script
-script:
+before_script:
   - echo `pwd`
+  - mysql -u root -e 'CREATE DATABASE ${DATABASE_DB};'
   - php bin/console doctrine:schema:create
   - php bin/console doctrine:schema:validate
+
+# Run script
+script:
   - php bin/phpunit --coverage-clover=coverage.xml
 
 after_success:
