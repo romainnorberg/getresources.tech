@@ -1,14 +1,6 @@
-//require('./../../node_modules/socket.io-client/lib/socket');
-
 import io from './../../node_modules/socket.io-client/';
 
-//let serverUrl = 'http://getresources.local/';
-let serverUrl = 'https://server-staging.getresources.tech/';
-
 const socket = io(serverUrl);
-
-console.log('init');
-
 socket.on('connect', onConnect);
 
 function onConnect() {
@@ -310,7 +302,7 @@ class Search {
     let card = document.createElement("div");
     let card_content = document.createElement("div");
     let title = document.createElement('a');
-    column.className = 'column is-two-fifths';
+    column.className = 'column is-one-third';
     column.setAttribute('data-id', hit._id);
     column.setAttribute('data-slug', hit.slug);
 
@@ -370,7 +362,7 @@ class Tools {
 window.addEventListener("load", () => {
 
   // Search (need page fully loaded => css)
-  if (document.body.classList.contains("app_default_index") && document.getElementById('primary-search-box')) {
+  if (document.body.classList.contains("homepage") && document.getElementById('primary-search-box')) {
     const search = new Search(socket);
 
     document.getElementById('search-random-example').addEventListener('click', (event) => {

@@ -44,6 +44,8 @@ install:
 # Run script
 script:
   - echo `pwd`
+  - php bin/console doctrine:schema:create
+  - php bin/console doctrine:schema:validate
   - php bin/phpunit --coverage-clover=coverage.xml
 
 after_success:

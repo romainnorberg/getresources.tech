@@ -4,3 +4,5 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         asset_static_url: "%env(ASSET_STATIC_URL_PROTOCOL)%%env(ASSET_STATIC_URL)%"
+        server_url: "%env(SERVER_URL)%"
+        website_url: "%env(WEBSITE_MAIN_URL)%"

@@ -1,28 +1,12 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Controller;
 
-use Psr\Container\ContainerInterface;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\AppWebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
-class DefaultControllerTest extends WebTestCase
+class DefaultControllerTest extends AppWebTestCase
 {
-    /**
-     * @var \Symfony\Component\HttpKernel\Client
-     */
-    protected $client;
-
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    public function setUp()
-    {
-        $this->client = $client = self::createClient();
-        $this->container = $this->client->getContainer();
-    }
-
     /**
      * @dataProvider urlProvider
      *
@@ -38,5 +22,20 @@ class DefaultControllerTest extends WebTestCase
     public function urlProvider()
     {
         yield ['/'];
+    }
+
+    public function testHomepage()
+    {
+        $url = $this->client->getContainer()->get('router')->generate('homepage', []);
+        $crawler = $this->client->request('GET', $url);
+
+        $response = $this->client->getResponse();
+
+        // Form
+        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertEquals('homepage', $crawler->filterXPath('//body')->attr('class')); // mandatory for JS
+        $this->assertContains('Find all tech resources, search and filter by language, type and more.', $response->getContent());
+
+        return $crawler;
     }
 }

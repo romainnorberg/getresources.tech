@@ -34,6 +34,9 @@
   }(document, "script", "twitter-wjs"));
 </script>
 
+<script type="text/javascript">
+  var serverUrl = '{{ server_url }}';
+</script>
 <script src="{{ preload(asset('build/js/app.js')) }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
