@@ -23,5 +23,19 @@ doc: http://symfony.com/doc/current/frontend.html
 - `yarn run encore production`
 
 ### Tests
+
+#### Fixtures:
+- `APP_ENV=test php bin/console hautelook:fixtures:load -n -vv`
+
+#### Run
 - `php bin/phpunit`
 - (optionnal) `php bin/phpunit --coverage-clover=coverage.xml`
+
+#### Shorcut (test)
+- `sh tests/runTests.sh`
+
+### Local
+
+#### Bootstrap 
+- `cp .env.dist .env`
+- `cp .env.test.dist .env.test`

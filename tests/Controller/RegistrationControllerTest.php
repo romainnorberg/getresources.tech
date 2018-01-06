@@ -77,7 +77,7 @@ class RegistrationControllerTest extends AppWebTestCase
         // Test 2: fill form with error
         $form = $crawler->filterXPath($this->filterXPathForm)->form();
         $form->setValues($values);
-        $crawler = $this->client->submit($form);
+        $this->client->submit($form);
 
         return $this->client->getResponse();
     }

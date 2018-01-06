@@ -1,0 +1,5 @@
+algolia_search:
+    prefix: ''
+    indices:
+        - name: sites
+          class: App\Entity\Site
