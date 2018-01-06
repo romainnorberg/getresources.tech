@@ -35,6 +35,8 @@ cache:
 before-install:
   - composer self-update
   - composer clear-cache
+  - cp .env.dist .env
+  - cp .env.test.dist .env.test
 
 # Install
 install:
@@ -43,8 +45,6 @@ install:
 
 before_script:
   - echo `pwd`
-  - cp .env.dist .env
-  - cp .env.test.dist .env.test
   - mysql -u root -e "CREATE DATABASE \`${DATABASE_DB}\`;"
   - php bin/console doctrine:schema:create
   - php bin/console doctrine:schema:validate
