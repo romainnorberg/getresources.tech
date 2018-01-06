@@ -7,7 +7,6 @@ sudo: false
 # Start mysql service
 services:
   - mysql
-  - redis-server
 
 php:
   - 7.2
