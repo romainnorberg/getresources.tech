@@ -35,11 +35,12 @@ cache:
 before-install:
   - composer self-update
   - composer clear-cache
-  - cp .env.dist .env
-  - cp .env.test.dist .env.test
 
 # Install
 install:
+  - echo `pwd`
+  - cp .env.dist .env
+  - cp .env.test.dist .env.test
   - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS; fi
   - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
 
