@@ -7,21 +7,33 @@ use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class RegistrationController extends Controller
 {
     /**
      * @Route("/register", name="user_registration")
+     * @param Request             $request
+     * @param TranslatorInterface $translator
+     *
      * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \LogicException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+     * @throws \InvalidArgumentException
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function registerAction(Request $request, TranslatorInterface $translator)
     {
-        // 1) build the form
+        // build the form
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
-        // 2) handle the submit (will only happen on POST)
+        // handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -29,7 +41,7 @@ class RegistrationController extends Controller
             $user->setCreated(new \DateTime());
             $user->setUpdated(new \DateTime());
 
-            // 4) save the User!
+            // save the User!
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -37,12 +49,21 @@ class RegistrationController extends Controller
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 
+            // login user
+            $providerKey = 'secured_area';
+            $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+            $this->container->get('security.token_storage')->setToken($token);
+
             return $this->redirectToRoute('homepage');
         }
 
         return $this->render(
             'registration/register.html.twig',
-            ['form' => $form->createView()]
+            [
+                'page_title' => $translator->trans('Registration page'),
+                'form'       => $form->createView(),
+                'error'      => null,
+            ]
         );
     }
 }

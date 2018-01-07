@@ -23,7 +23,10 @@ if ((isset($_SERVER['APP_ENV']) && $_SERVER['APP_ENV'] === 'test') || (isset($_E
     (new Dotenv())->load(__DIR__ . '/../.env.test');
 }
 
-if ($_SERVER['APP_DEBUG'] ?? ('prod' !== ($_SERVER['APP_ENV'] ?? 'dev'))) {
+$env = $_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'];
+
+
+if ($_SERVER['APP_DEBUG'] ?? ('prod' !== ($env ?? 'dev'))) {
     umask(0000);
 
     Debug::enable();
@@ -37,7 +40,7 @@ if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? false) {
     Request::setTrustedHosts(explode(',', $trustedHosts));
 }
 
-$kernel = new Kernel($_SERVER['APP_ENV'] ?? 'dev', $_SERVER['APP_DEBUG'] ?? ('prod' !== ($_SERVER['APP_ENV'] ?? 'dev')));
+$kernel = new Kernel($env ?? 'dev', $_SERVER['APP_DEBUG'] ?? ('prod' !== ($env ?? 'dev')));
 
 // Wrap the default Kernel with the CacheKernel one
 $kernel = new CacheKernel($kernel);

@@ -39,3 +39,13 @@ doc: http://symfony.com/doc/current/frontend.html
 #### Bootstrap 
 - `cp .env.dist .env`
 - `cp .env.test.dist .env.test`
+
+### Migration
+- `bin/console doctrine:migrations:diff`
+- `bin/console doctrine:migrations:migrate --write-sql="src/Migrations/update.sql"`
+
+### Hosting
+Hosted on clever-cloud.com
+
+#### Env var
+- CC_POST_BUILD_HOOK=sh clevercloud/hook/post_build_hook.sh

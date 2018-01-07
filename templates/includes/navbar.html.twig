@@ -1,18 +1,7 @@
-<nav class="navbar">
+<nav id="navbar" class="navbar is-light">
     <div class="container">
         <div class="navbar-brand">
-            <h1 class="logo">
-                <div class="img" style="background-image:url('{{ asset_static_url }}/assets/images/branding/logo-square-white.svg');">
-                    &nbsp;
-                </div>
-                <a href="/">
-                    getresources
-                    <span class="extention">.tech</span>
-                </a>
-                <div class="tag is-warning beta">
-                    beta!
-                </div>
-            </h1>
+            {% include('includes/logo.html.twig') %}
             <span class="navbar-burger burger" data-target='navMenu'>
                 <span></span>
                 <span></span>
@@ -21,12 +10,24 @@
         </div>
         <div id="navMenu" class="navbar-menu">
             <a href="/" class="navbar-item">
-                Search
+                {% trans %}Search{% endtrans %}
             </a>
             <div class="navbar-end">
-                <a href="/login" class="navbar-item">
-                    Sign up / login
-                </a>
+                {% if app.user %}
+                    <a href="{{ path('account') }}" class="navbar-item">
+                        {{ app.user.username }}
+                    </a>
+                    <a href="{{ path('logout') }}" class="navbar-item">
+                        {% trans %}Logout{% endtrans %}
+                    </a>
+                {% else %}
+                    <a href="{{ path('user_registration') }}" class="navbar-item">
+                        {% trans %}Sign up{% endtrans %}
+                    </a>
+                    <a href="{{ path('login') }}" class="navbar-item">
+                        {% trans %}Login{% endtrans %}
+                    </a>
+                {% endif %}
                 <span class="navbar-item">
                     <p class="control">
                         <a class="bd-tw-button button" data-size="large", data-social-network="Twitter"

@@ -8,7 +8,6 @@ security:
         doctrine:
             entity:
                 class: App\Entity\User
-                property: username
 
     firewalls:
         main:

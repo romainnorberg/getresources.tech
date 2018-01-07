@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180101202613 extends AbstractMigration
+class Version20180107170502 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
@@ -26,6 +26,7 @@ class Version20180101202613 extends AbstractMigration
         $this->addSql('ALTER TABLE source ADD CONSTRAINT FK_5F8A7F73F6BD1646 FOREIGN KEY (site_id) REFERENCES site (id)');
         $this->addSql('CREATE INDEX IDX_5F8A7F73B03A8386 ON source (created_by_id)');
         $this->addSql('CREATE INDEX IDX_5F8A7F73F6BD1646 ON source (site_id)');
+        $this->addSql('ALTER TABLE user CHANGE email email VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema)
@@ -44,5 +45,6 @@ class Version20180101202613 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_5F8A7F73B03A8386 ON source');
         $this->addSql('DROP INDEX IDX_5F8A7F73F6BD1646 ON source');
         $this->addSql('ALTER TABLE source DROP created_by_id, DROP site_id, DROP name, DROP created, CHANGE id id INT AUTO_INCREMENT NOT NULL');
+        $this->addSql('ALTER TABLE user CHANGE email email VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci');
     }
 }

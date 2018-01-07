@@ -1,16 +1,82 @@
 {% extends 'base.html.twig' %}
 
+{% block navbar %}{% endblock %}
+
 {% block body %}
+    <div class="container has-text-centered">
+        {% include('includes/logo.html.twig') %}
+    </div>
+    <section class="login-form hero is-success">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-full-mobile is-8-tablet is-offset-2-tablet is-6-desktop is-offset-3-desktop">
+                    <h3 class="title has-text-grey">{% trans %}Register{% endtrans %}</h3>
+                    <p class="subtitle has-text-grey">{% trans %}Please register to proceed.{% endtrans %}</p>
+                    {% if error %}
+                        <div class="notification help is-warning">
+                            <p class="is-size-4">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                        </div>
+                    {% endif %}
+                    <div class="box">
+                        {% include 'account/social_login.html.twig' with {'label': 'Register with socials'|trans } %}
+                        {{ form_start(form) }}
 
-    <h2>Register</h2>
+                        <div class="field">
+                            <div class="control">
+                                {{ form_widget(form.username, {'attr': {'class': 'input is-large', 'placeholder': 'Your username'|trans  }}) }}
+                                {% if form.username.vars.errors|length %}
+                                    <div class="notification help is-warning">
+                                        {{ form_errors(form.username) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
 
-    {{ form_start(form) }}
-        {{ form_row(form.username) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.plainPassword.first) }}
-        {{ form_row(form.plainPassword.second) }}
+                        <div class="field">
+                            <div class="control">
+                                {{ form_widget(form.email, {'attr': {'class': 'input is-large', 'placeholder': 'Your email (optional)'|trans  }}) }}
+                                {% if form.email.vars.errors|length %}
+                                    <div class="notification help is-warning">
+                                        {{ form_errors(form.email) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
 
-        <button type="submit">Register!</button>
-    {{ form_end(form) }}
+                        <div class="field">
+                            <div class="control">
+                                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'input is-large', 'placeholder': 'Password'|trans  }}) }}
+                                {% if form.plainPassword.first.vars.errors|length %}
+                                    <div class="notification is-warning">
+                                        {{ form_errors(form.plainPassword.first) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'input is-large', 'placeholder': 'Repeat password'|trans  }}) }}
+                                {% if form.plainPassword.second.vars.errors|length %}
+                                    <div class="notification is-warning">
+                                        {{ form_errors(form.plainPassword.second) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <input class="button is-block is-info is-large is-fullwidth" type="submit" value="{% trans %}Register (free){% endtrans %}"/>
+                        {{ form_end(form) }}
+                    </div>
+                    <p class="has-text-grey">
+                        <a href="{{ path('login') }}">{% trans %}Already member ? Login{% endtrans %}</a> &nbsp;·&nbsp;
+                        <a href="{{ path('user_recover_password') }}">{% trans %}Forgot Password{% endtrans %}</a>
+                        &nbsp;·&nbsp;
+                        <a href="{{ path('help_index') }}">{% trans %}Need Help?{% endtrans %}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 {% endblock %}

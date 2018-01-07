@@ -2,9 +2,9 @@
     <div class="container">
         <div class="columns">
             <div class="column is-8-desktop is-offset-2-desktop">
-                <p><strong class="has-text-weight-bold">© getresources.tech</strong></p>
+                <p title="{{ app.environment }}"><strong class="has-text-weight-bold">© {{ "now"|date("Y") }} getresources.tech</strong></p>
                 <p>
-                    <small>Find all tech resources, search and filter by language, type and more.</small>
+                    <small>{% trans %}Find all tech resources, search and filter by language, type and more.{% endtrans %}</small>
                 </p>
                 <a href="https://www.algolia.com" target="blank" class="algolia-thanks">
                     <img src="{{ asset_static_url }}/assets/images/search/search-by-algolia.svg"/>
