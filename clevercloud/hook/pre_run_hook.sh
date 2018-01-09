@@ -26,7 +26,32 @@
 echo "====="
 echo "Running clevercloud/hook/pre_run_hook.sh...(INSTANCE_TYPE: ${INSTANCE_TYPE})"
 
-sh ${APP_HOME}/clevercloud/export_env_var.sh
+# sh ${APP_HOME}/clevercloud/export_env_var.sh
+
+echo 'INJECT ALGOLIA_API_KEY';
+echo 'export ALGOLIA_API_KEY=${ALGOLIA_API_KEY_MASTER}' >> /home/bas/applicationrc
+
+echo 'INJECT ALGOLIA_APP_ID';
+echo 'export ALGOLIA_APP_ID=${ALGOLIA_API_APPLICATION_ID}' >> /home/bas/applicationrc
+
+echo 'INJECT DATABASE_DB';
+echo 'export DATABASE_DB=${MYSQL_ADDON_DB}' >> /home/bas/applicationrc
+
+echo 'INJECT DATABASE_HOST';
+echo 'export DATABASE_HOST=${MYSQL_ADDON_HOST}' >> /home/bas/applicationrc
+
+echo 'INJECT DATABASE_PASSWORD';
+echo 'export DATABASE_PASSWORD=${MYSQL_ADDON_PASSWORD}' >> /home/bas/applicationrc
+
+echo 'INJECT DATABASE_PORT';
+echo 'export DATABASE_PORT=${MYSQL_ADDON_PORT}' >> /home/bas/applicationrc
+
+echo 'INJECT DATABASE_URL';
+echo 'export DATABASE_URL=${MYSQL_ADDON_URI}' >> /home/bas/applicationrc
+
+echo 'INJECT DATABASE_USER';
+echo 'export DATABASE_USER=${MYSQL_ADDON_USER}' >> /home/bas/applicationrc
+
 
 echo "====="
 
