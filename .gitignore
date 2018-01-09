@@ -3,6 +3,7 @@
 .env.test
 /public/bundles/
 /var/
+!/vendor/autoload_phpunit.php
 /vendor/
 ###< symfony/framework-bundle ###
 
