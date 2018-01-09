@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Run from env CC_PRE_RUN_HOOK=sh clevercloud/hook/pre_run_hook.sh
+# Run from env CC_PRE_RUN_HOOK=sh clevercloud/hook/pre_build_hook.sh
 # doc: https://www.clever-cloud.com/doc/clever-cloud-overview/hooks/
 
 # source environment variables
@@ -24,7 +24,7 @@
 # clever-cloud doesn't support env. variable alias. Need hack
 
 echo "====="
-echo "Running clevercloud/hook/pre_run_hook.sh...(INSTANCE_TYPE: ${INSTANCE_TYPE})"
+echo "Running clevercloud/hook/pre_build_hook.sh...(INSTANCE_TYPE: ${INSTANCE_TYPE})"
 
 sh ${APP_HOME}clevercloud/export_env_var.sh
 
