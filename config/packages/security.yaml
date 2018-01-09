@@ -18,6 +18,11 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                default_target_path: homepage
+                use_referer: true
+                use_forward: true
+                success_handler: App\EventListener\AuthenticationEventListener
+
             logout:
                 path:   /logout
                 target: /

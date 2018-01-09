@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use Doctrine\ORM\EntityManager;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Dotenv\Dotenv;
@@ -9,9 +10,14 @@ use Symfony\Component\Dotenv\Dotenv;
 class AppWebTestCase extends WebTestCase
 {
     /**
-     * @var \Symfony\Component\HttpKernel\Client
+     * @var \Symfony\Bundle\FrameworkBundle\Client
      */
     protected $client;
+
+    /**
+     * @var EntityManager
+     */
+    public $em;
 
     /**
      * @var ContainerInterface
@@ -20,7 +26,13 @@ class AppWebTestCase extends WebTestCase
 
     public function setUp()
     {
-        $this->client = self::createClient();
+        static::$kernel = static::createKernel();
+        static::$kernel->boot();
+        $this->em = static::$kernel->getContainer()
+            ->get('doctrine')
+            ->getManager('default');
+
+        $this->client = static::createClient();
         $this->container = $this->client->getContainer();
     }
 

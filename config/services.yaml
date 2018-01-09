@@ -33,14 +33,16 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\EventListener\ResponseListener:
-        autowire: true
         tags:
             - { name: kernel.response_listener, event: kernel.response }
 
     App\EventListener\Doctrine\HashPasswordListener:
-        autowire: true
         tags:
             - { name: doctrine.event_subscriber }
+
+    App\EventListener\AuthenticationEventListener:
+        tags:
+            - { name: authentication.success.listener }
 
     Algolia\SearchBundle\IndexManager:
             alias: search.index_manager

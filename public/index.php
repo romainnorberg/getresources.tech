@@ -25,7 +25,6 @@ if ((isset($_SERVER['APP_ENV']) && $_SERVER['APP_ENV'] === 'test') || (isset($_E
 
 $env = $_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'];
 
-
 if ($_SERVER['APP_DEBUG'] ?? ('prod' !== ($env ?? 'dev'))) {
     umask(0000);
 

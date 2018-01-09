@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Run from env CC_POST_BUILD_HOOK=sh clevercloud/hook/post_build_hook.sh
+# Run from env CC_PRE_RUN_HOOK=sh clevercloud/hook/pre_run_hook.sh
 # doc: https://www.clever-cloud.com/doc/clever-cloud-overview/hooks/
 
 # source environment variables
@@ -18,14 +18,16 @@
 # INSTANCE_NUMBER : See below
 #
 #
-source /home/bas/applicationrc
 
-echo "====="
-echo "Running clevercloud/hook/post_build_hook.sh...(INSTANCE_TYPE: ${INSTANCE_TYPE})"
+# ------------------------
 
-if [ -n ${INSTANCE_TYPE} ] && [ ${INSTANCE_TYPE} = 'build' ]
-then
-  echo "ok"
-fi
+# clever-cloud doesn't support env. variable alias. Need hack
+echo 'export ALGOLIA_API_KEY=${ALGOLIA_API_KEY_MASTER}' >> /home/bas/applicationrc
+echo 'export ALGOLIA_APP_ID=${ALGOLIA_API_APPLICATION_ID}' >> /home/bas/applicationrc
+echo 'export DATABASE_DB=${MYSQL_ADDON_DB}' >> /home/bas/applicationrc
+echo 'export DATABASE_HOST=${MYSQL_ADDON_HOST}' >> /home/bas/applicationrc
+echo 'export DATABASE_PASSWORD=${MYSQL_ADDON_PASSWORD}' >> /home/bas/applicationrc
+echo 'export DATABASE_PORT=${MYSQL_ADDON_PORT}' >> /home/bas/applicationrc
+echo 'export DATABASE_URL=${MYSQL_ADDON_URI}' >> /home/bas/applicationrc
+echo 'export DATABASE_USER=${MYSQL_ADDON_USER}' >> /home/bas/applicationrc
 
-echo "====="

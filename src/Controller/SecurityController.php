@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -16,9 +17,23 @@ class SecurityController extends Controller
      * @param TranslatorInterface $translator
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \Symfony\Component\Routing\Exception\RouteNotFoundException
+     * @throws \Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException
+     * @throws \Symfony\Component\Routing\Exception\MissingMandatoryParametersException
+     * @throws \Symfony\Component\Routing\Exception\InvalidParameterException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+     * @throws \InvalidArgumentException
      */
-    public function login(AuthenticationUtils $authUtils, TranslatorInterface $translator)
+    public function login(AuthenticationUtils $authUtils, TranslatorInterface $translator): \Symfony\Component\HttpFoundation\Response
     {
+        if (true === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            $url = $this->container->get('router')->generate('homepage');
+
+            return new RedirectResponse($url);
+        }
+
         // get the login error if there is one
         $error = $authUtils->getLastAuthenticationError();
 
