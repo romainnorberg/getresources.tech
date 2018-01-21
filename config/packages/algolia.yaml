@@ -1,3 +1,7 @@
+parameters:
+    env(ALGOLIA_APP_ID): '%env(ALGOLIA_API_APPLICATION_ID)%'
+    env(ALGOLIA_API_KEY): '%env(ALGOLIA_API_KEY_SEARCHONLY)%'
+
 algolia_search:
     prefix: ''
     indices:

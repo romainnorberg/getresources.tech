@@ -14,8 +14,8 @@ services:
 
     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
           arguments:
-              - 'mysql:dbname=%env(DATABASE_DB)%'
-              - { db_username: '%env(DATABASE_USER)%', db_password: '%env(DATABASE_PASSWORD)%' }
+              - 'mysql:dbname=%env(MYSQL_ADDON_DB)%'
+              - { db_username: '%env(MYSQL_ADDON_USER)%', db_password: '%env(MYSQL_ADDON_PASSWORD)%' }
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

@@ -26,7 +26,7 @@
 echo "====="
 echo "Running clevercloud/hook/pre_build_hook.sh...(INSTANCE_TYPE: ${INSTANCE_TYPE})"
 
-sh ${APP_HOME}/clevercloud/export_env_var.sh
+
 
 echo "====="
 
