@@ -1,0 +1,11 @@
+enqueue:
+    transport:
+        default: redis
+        redis:
+            dsn: "redis://%env(REDIS_ENDPOINT)%:%env(REDIS_PORT)%"
+            vendor: predis
+    client:
+        prefix: cust_report
+        app_name: cust_app
+        router_queue: cust
+        default_processor_queue: cust

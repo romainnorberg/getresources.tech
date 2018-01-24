@@ -7,6 +7,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(indexes={
+ *     @ORM\Index(name="visitor_ip_idx", columns={"visitor_ip"}),
+ *     @ORM\Index(name="created_by_idx", columns={"created_by"}),
  *     @ORM\Index(name="site_id_idx", columns={"site_id"}),
  * })
  * @ORM\Entity(repositoryClass="App\Repository\SiteHitRepository")
@@ -46,4 +48,103 @@ class SiteHit
      */
     private $site;
 
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return SiteHit
+     */
+    public function setId(string $id): SiteHit
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVisitorIp()
+    {
+        return $this->visitorIp;
+    }
+
+    /**
+     * @param mixed $visitorIp
+     *
+     * @return SiteHit
+     */
+    public function setVisitorIp($visitorIp): SiteHit
+    {
+        $this->visitorIp = $visitorIp;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     *
+     * @return SiteHit
+     */
+    public function setCreated(\DateTime $created): SiteHit
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * @param mixed $createdBy
+     *
+     * @return SiteHit
+     */
+    public function setCreatedBy($createdBy): SiteHit
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * @param mixed $site
+     *
+     * @return SiteHit
+     */
+    public function setSite($site): SiteHit
+    {
+        $this->site = $site;
+
+        return $this;
+    }
 }

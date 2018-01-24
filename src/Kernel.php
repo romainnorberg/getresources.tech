@@ -10,9 +10,18 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 
 class Kernel extends BaseKernel
 {
+    public const DEFAULT_TIMEZONE       = '+00:00';
+    public const DEFAULT_TIMEZONE_LABEL = 'GMT';
+
     use MicroKernelTrait;
 
     public const CONFIG_EXTS = '.{php,xml,yaml,yml}';
+
+    public function __construct($environment, $debug)
+    {
+        date_default_timezone_set(self::DEFAULT_TIMEZONE_LABEL);
+        parent::__construct($environment, $debug);
+    }
 
     public function getCacheDir()
     {

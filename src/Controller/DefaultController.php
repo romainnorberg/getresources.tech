@@ -21,8 +21,8 @@ class DefaultController extends AbstractController
     /**
      * DefaultController constructor.
      *
-     * @param IndexManager  $indexManager
-     * @param EntityManager $em
+     * @param IndexManager           $indexManager
+     * @param EntityManagerInterface $em
      */
     public function __construct(IndexManager $indexManager, EntityManagerInterface $em)
     {
@@ -39,11 +39,12 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
-
-        $sites = $this->indexManager->search('example', Site::class, $this->em);
+        $sites = $this->indexManager->rawSearch('', Site::class);
 
         return $this->render('default/index.html.twig', [
-            'sites' => $sites,
+            'sites' => $sites['hits'], // raw search
         ]);
+
+
     }
 }

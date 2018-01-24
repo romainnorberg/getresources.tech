@@ -12,10 +12,14 @@ services:
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
 
-    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
-          arguments:
-              - 'mysql:host=%env(MYSQL_ADDON_HOST)%;port=%env(MYSQL_ADDON_PORT)%;dbname=%env(MYSQL_ADDON_DB)%'
-              - { db_username: '%env(MYSQL_ADDON_USER)%', db_password: '%env(MYSQL_ADDON_PASSWORD)%' }
+    app.infrastructure.session.redis:
+        class: App\Infrastructure\Session\RedisHandler
+        arguments:
+            - "%env(REDIS_ENDPOINT)%"
+            - "%env(REDIS_PASSWORD)%"
+            - "%env(REDIS_PORT)%"
+            - "%env(REDIS_SCHEME)%"
+            - "%env(REDIS_TTL)%"
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -46,3 +50,17 @@ services:
 
     Algolia\SearchBundle\IndexManager:
             alias: search.index_manager
+
+    site_normalizer:
+        class: App\Serializer\Normalizer\SiteNormalizer
+        tags:
+            - { name: serializer.normalizer }
+        public: true # false by default in Symfony4
+
+    App\Serializer\Normalizer\SiteNormalizer: "@site_normalizer"
+
+    site_hit_processor:
+        class: App\Processor\SiteHitProcessor
+        tags:
+            - { name: 'enqueue.client.processor' }
+        public: true
