@@ -46,7 +46,7 @@ install:
 before_script:
   - echo `pwd`
   - mysql -u root -e "CREATE DATABASE \`${MYSQL_ADDON_DB}\`;"
-  - sudo redis-server --port ${REDIS_PORT} --requirepass '${REDIS_PASSWORD}'
+  - sudo redis-server --port ${REDIS_PORT} --requirepass '${REDIS_PASSWORD}'&
   - php bin/console doctrine:schema:create
   - php bin/console doctrine:schema:validate
 
