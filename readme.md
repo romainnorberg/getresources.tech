@@ -40,6 +40,11 @@ doc: http://symfony.com/doc/current/frontend.html
 - `cp .env.dist .env`
 - `cp .env.test.dist .env.test`
 
+#### Running
+- `redis-server --port 6380 --requirepass 'secret'`
+- `yarn run encore dev --watch`
+- `php -d variables_order=EGPCS -S localhost:8000 -t public`
+
 ### Migration
 - `bin/console doctrine:migrations:diff`
 - `bin/console doctrine:migrations:migrate --write-sql="src/Migrations/update.sql"`
