@@ -15,7 +15,7 @@ services:
     app.infrastructure.session.redis:
         class: App\Infrastructure\Session\RedisHandler
         arguments:
-            - "%env(REDIS_ENDPOINT)%"
+            - "%env(REDIS_HOST)%"
             - "%env(REDIS_PASSWORD)%"
             - "%env(REDIS_PORT)%"
             - "%env(REDIS_SCHEME)%"

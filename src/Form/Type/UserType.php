@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Type;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -17,7 +17,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'required' => false
+                'required' => false,
             ])
             ->add('username', TextType::class)
             ->add('plainPassword', RepeatedType::class, [
@@ -27,6 +27,11 @@ class UserType extends AbstractType
             ]);
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

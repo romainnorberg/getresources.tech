@@ -20,4 +20,16 @@ class AccountController extends Controller
             'account/index.html.twig'
         );
     }
+    /**
+     * @Route("/submit", name="submit")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function submitAction(Request $request): \Symfony\Component\HttpFoundation\Response
+    {
+        return $this->render(
+            'account/submit.html.twig'
+        );
+    }
 }

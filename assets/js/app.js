@@ -301,20 +301,31 @@ class Search {
     let column = document.createElement("div");
     let card = document.createElement("div");
     let card_content = document.createElement("div");
-    let title = document.createElement('a');
+    let media = document.createElement("div");
+    let media_content = document.createElement("div");
+    let title = document.createElement('p');
+    let title_link = document.createElement('a');
+    let subtitle = document.createElement('p');
+
     column.className = 'column is-one-third';
-    column.setAttribute('data-id', hit._id);
+    column.setAttribute('data-id', hit.objectID);
     column.setAttribute('data-slug', hit.slug);
 
     card.className = 'card';
     card_content.className = 'card-content';
+    media.className = 'media';
+    media_content.className = 'media-content';
 
-    title.setAttribute('href', hit.internal_url);
-    title.setAttribute('target', '_blank');
-    title.innerHTML = hit.name;
+    title.className = 'title';
+    title_link.setAttribute('href', hit.link);
+    title_link.setAttribute('target', '_blank');
+    title_link.innerHTML = hit.name;
+    title.appendChild(title_link);
 
-    card_content.appendChild(title);
-    card.appendChild(title);
+    media_content.appendChild(title);
+    media.appendChild(media_content);
+    card_content.appendChild(media);
+    card.appendChild(card_content);
     column.appendChild(card);
 
     return column;

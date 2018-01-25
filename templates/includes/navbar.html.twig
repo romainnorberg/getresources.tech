@@ -13,6 +13,9 @@
                 {% trans %}Search{% endtrans %}
             </a>
             <div class="navbar-end">
+                <a href="{{ path('submit') }}" class="navbar-item">
+                    {% trans %}Submit{% endtrans %}
+                </a>
                 {% if app.user %}
                     <a href="{{ path('account') }}" class="navbar-item">
                         {{ app.user.username }}
