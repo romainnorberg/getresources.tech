@@ -5,8 +5,8 @@ language: php
 sudo: true
 
 services:
-  - mysql # Start mysql service
-  - redis-server # Start redis server
+  - mysql
+  - redis-server
 
 php:
   - 7.2
@@ -32,6 +32,7 @@ cache:
 
 # Update composer
 before-install:
+  - echo "extension=redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini # https://blog.travis-ci.com/2013-03-08-preinstalled-php-extensions / https://docs.travis-ci.com/user/languages/php/#PHP-extensions
   - composer self-update
   - composer clear-cache
 
@@ -46,7 +47,7 @@ install:
 before_script:
   - echo `pwd`
   - mysql -u root -e "CREATE DATABASE \`${MYSQL_ADDON_DB}\`;"
-  - sudo redis-server --port ${REDIS_PORT} --requirepass '${REDIS_PASSWORD}'&
+  - sudo redis-server --port ${REDIS_PORT} --requirepass '${REDIS_PASSWORD}'& # slap a & at the end of the line, and the process will be forked into the background
   - php bin/console doctrine:schema:create
   - php bin/console doctrine:schema:validate
 
