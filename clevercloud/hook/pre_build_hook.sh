@@ -25,9 +25,7 @@
 
 echo "====="
 echo "Running clevercloud/hook/pre_build_hook.sh...(INSTANCE_TYPE: ${INSTANCE_TYPE})"
-
-
-
+echo "..."
 echo "====="
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Run from env CC_POST_BUILD_HOOK=sh clevercloud/hook/post_build_hook.sh
+# Run from env CC_POST_BUILD_HOOK=sh clevercloud/hook/run_succeeded.sh
 # doc: https://www.clever-cloud.com/doc/clever-cloud-overview/hooks/
 
 # source environment variables
@@ -17,26 +17,15 @@
 #
 # INSTANCE_NUMBER : See below
 #
-# IGNORE_BUILD_ERROR : false|true. ignore build error on deployment
 #
 source /home/bas/applicationrc
 
 echo "====="
-echo "Running clevercloud/hook/post_build_hook.sh...(INSTANCE_TYPE: ${INSTANCE_TYPE} / IGNORE_BUILD_ERROR: ${IGNORE_BUILD_ERROR})"
+echo "Running clevercloud/hook/run_succeeded.sh...(INSTANCE_TYPE: ${INSTANCE_TYPE})"
 
-if [ -n ${INSTANCE_TYPE} ] && [ ${INSTANCE_TYPE} = 'build' ] && [ -n ${IGNORE_BUILD_ERROR} ] && [ ${IGNORE_BUILD_ERROR} = 'false' ]
+if [ -n ${INSTANCE_TYPE} ] && [ ${INSTANCE_TYPE} = 'build' ]
 then
-  php ${APP_HOME}/bin/console doctrine:schema:validate -v --skip-mapping
-
-  if [ $? -eq 2 ]
-  then
-   echo $?
-   echo '[EXIT] FAIL - The database schema is not in sync with the current mapping file.'
-   php ${APP_HOME}/bin/console doctrine:schema:update --dump-sql
-   exit 1 # stop clever cloud deployment !!!
-  else
-   echo $?
-  fi
+  php ${APP_HOME}/bin/console enqueue:consume -vv&
 fi
 
 echo "====="
