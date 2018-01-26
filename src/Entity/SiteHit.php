@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Table(indexes={
  *     @ORM\Index(name="visitor_ip_idx", columns={"visitor_ip"}),
- *     @ORM\Index(name="created_by_idx", columns={"created_by"}),
+ *     @ORM\Index(name="created_by_idx", columns={"created_by_id"}),
  *     @ORM\Index(name="site_id_idx", columns={"site_id"}),
  * })
  * @ORM\Entity(repositoryClass="App\Repository\SiteHitRepository")
@@ -117,13 +117,13 @@ class SiteHit
     }
 
     /**
-     * @param mixed $createdBy
+     * @param User $user
      *
      * @return SiteHit
      */
-    public function setCreatedBy($createdBy): SiteHit
+    public function setCreatedBy(\App\Entity\User $user): SiteHit
     {
-        $this->createdBy = $createdBy;
+        $this->createdBy = $user;
 
         return $this;
     }
