@@ -23,6 +23,7 @@ source /home/bas/applicationrc
 # run only on first production instance
 if [ -n ${INSTANCE_TYPE} ] && [ ${INSTANCE_TYPE} = 'production' ]  && [ -n ${INSTANCE_NUMBER} ] && [ ${INSTANCE_NUMBER} -eq 0 ]
 then
+  # The brackets around the [a] (or pick a different letter) prevent grep from finding itself. This makes the grep -v grep bit unnecessary. I also removed the grep -v $$ and fixed the awk part to accomplish the same thing.
   status=`ps -efww | grep -w "[e]nqueue:consume" | awk -vpid=$$ '$2 != pid { print $2 }'`
   if [ ! -z "$status" ]; then
       echo "[`date`] : enqueue:consume : Process is already running"

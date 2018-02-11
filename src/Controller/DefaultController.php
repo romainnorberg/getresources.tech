@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class DefaultController extends AbstractController
 {
@@ -33,6 +34,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="homepage")
      *
+     * @Cache(maxage="0", smaxage="0", public=true)
      * @return Response
      * @throws \LogicException
      * @throws \InvalidArgumentException
@@ -49,9 +51,13 @@ class DefaultController extends AbstractController
             ] // parameters
         );
 
+        $response = new Response();
+        //$response->setSharedMaxAge(0);
+        //$response->headers->addCacheControlDirective('must-revalidate', true);
+
         return $this->render('default/index.html.twig', [
             'sites' => $sites['hits'], // raw search
-        ]);
+        ], $response);
 
 
     }

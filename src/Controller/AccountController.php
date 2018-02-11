@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Enqueue\Client\Producer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class AccountController extends Controller
 {
@@ -35,6 +36,7 @@ class AccountController extends Controller
     /**
      * @Route("/account", name="account")
      * @param Request $request
+     * @Cache(maxage="0", smaxage="0", public=true)
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -49,6 +51,7 @@ class AccountController extends Controller
      * @Route("/submit", name="submit")
      * @param Request $request
      *
+     * @Cache(maxage="0", smaxage="0", public=true)
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \LogicException
      */

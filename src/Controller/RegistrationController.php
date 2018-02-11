@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class RegistrationController extends Controller
 {
@@ -39,6 +40,7 @@ class RegistrationController extends Controller
      * @param Request             $request
      * @param TranslatorInterface $translator
      *
+     * @Cache(maxage="0", smaxage="0", public=true)
      * @throws \Symfony\Component\Form\Exception\LogicException
      * @throws \LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException

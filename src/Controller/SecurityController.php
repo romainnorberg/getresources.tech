@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class SecurityController extends Controller
 {
@@ -16,6 +17,7 @@ class SecurityController extends Controller
      * @param AuthenticationUtils $authUtils
      * @param TranslatorInterface $translator
      *
+     * @Cache(maxage="0", smaxage="0", public=true)
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      * @throws \Symfony\Component\Routing\Exception\RouteNotFoundException

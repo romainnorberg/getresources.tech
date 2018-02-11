@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use League\Uri;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class SiteHitController extends AbstractController
 {
@@ -32,6 +33,7 @@ class SiteHitController extends AbstractController
     }
 
     /**
+     * @Cache(maxage="0", smaxage="0", public=true)
      * @Route("/open/{siteSlug}", name="site_hit_open")
      */
     public function index($siteSlug): Response
