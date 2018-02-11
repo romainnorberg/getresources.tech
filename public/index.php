@@ -10,6 +10,13 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $env = $_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? null;
 
+// weird
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+    $_SERVER['SERVER_PORT'] = '443';
+} else {
+    $_SERVER['SERVER_PORT'] = '80';
+}
+
 if ($env === 'test') {
     if (!class_exists(Dotenv::class)) {
         throw new \RuntimeException('APP_ENV environment variable is not defined. You need to define environment variables for configuration or add "symfony/dotenv" as a Composer dependency to load variables from a .env file.');
