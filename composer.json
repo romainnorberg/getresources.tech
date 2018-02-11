@@ -44,7 +44,9 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "apcu-autoloader": true
     },
     "autoload": {
         "psr-4": {
@@ -83,7 +85,5 @@
             "id": "01C26YDBEESY5TVAVAS68B6EH2",
             "allow-contrib": false
         }
-    },
-    "optimize-autoloader": true,
-    "apcu-autoloader": true
+    }
 }
