@@ -23,9 +23,16 @@ source /home/bas/applicationrc
 echo "====="
 echo "Running clevercloud/hook/run_succeeded.sh...(INSTANCE_TYPE: ${INSTANCE_TYPE})"
 
-if [ -n ${INSTANCE_TYPE} ] && [ ${INSTANCE_TYPE} = 'build' ]
+# run only on first production instance
+if [ -n ${INSTANCE_TYPE} ] && [ ${INSTANCE_TYPE} = 'production' ]  && [ -n ${INSTANCE_NUMBER} ] && [ ${INSTANCE_NUMBER} -eq 0 ]
 then
-  php ${APP_HOME}/bin/console enqueue:consume -vv&
+  #
+  today=$(date +"%d%m%Y")
+
+  # enqueue job
+  enqueue_log_path="${APP_HOME}/var/log/server/enqueue_${INSTANCE_ID}.log"
+  echo "running enqueue:consume... (log into ${today})"
+  php ${APP_HOME}/bin/console enqueue:consume -v >> ${enqueue_log_path} &
 fi
 
 echo "====="
