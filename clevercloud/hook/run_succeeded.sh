@@ -31,8 +31,8 @@ then
 
   # enqueue job
   enqueue_log_path="${APP_HOME}/clevercloud/buckets/logs/server/enqueue_${INSTANCE_ID}.log"
-  echo "running enqueue:consume... (log into ${today})"
-  php ${APP_HOME}/bin/console enqueue:consume -v >> ${enqueue_log_path} &
+  echo "running enqueue:consume... (log into ${enqueue_log_path})"
+  php ${APP_HOME}/bin/console enqueue:consume -vv >> ${enqueue_log_path} 2>&1 &
 fi
 
 echo "====="
