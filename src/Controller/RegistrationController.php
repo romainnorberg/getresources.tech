@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Form\Type\UserType;
 use App\Entity\User;
+use App\Vo\UserRegistrationProcessorVo;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Enqueue\Client\Producer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +16,24 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class RegistrationController extends Controller
 {
+    /* @var EntityManager */
+    private $em;
+
+    /** @var \Enqueue\Client\Producer $producer * */
+    private $producer;
+
+    /**
+     * DefaultController constructor.
+     *
+     * @param EntityManagerInterface $em
+     * @param Producer               $producer
+     */
+    public function __construct(EntityManagerInterface $em, Producer $producer)
+    {
+        $this->em = $em;
+        $this->producer = $producer;
+    }
+
     /**
      * @Route("/register", name="user_registration")
      * @param Request             $request
@@ -45,8 +67,15 @@ class RegistrationController extends Controller
             $em->persist($user);
             $em->flush();
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
+            // send email (async)
+            // TODO
+            $UserRegistrationProcessorVo = new UserRegistrationProcessorVo();
+            $UserRegistrationProcessorVo->uniqId = uniqid('userRegistration_', true);
+            $this->producer->sendEvent('aUserRegistrationTopic', $UserRegistrationProcessorVo);
+
+            // set flash
+            $flashbag = $this->get('session')->getFlashBag();
+            $flashbag->add('success', 'Thank for registration');
 
             // login user
             $providerKey = 'secured_area';

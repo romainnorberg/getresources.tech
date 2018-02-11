@@ -46,9 +46,10 @@ class SiteHitController extends AbstractController
         // check
         // TODO
 
-        // log hit in queue (post job)
+        // log hit in queue (async)
+        // TODO
         $siteHitProcessorVo = new SiteHitProcessorVo();
-        $siteHitProcessorVo->uniqId = '8d8dso7s4ddt5';
+        $siteHitProcessorVo->uniqId = uniqid('siteHit_', true);
         $this->producer->sendEvent('aSiteHitTopic', $siteHitProcessorVo);
 
         // generate url

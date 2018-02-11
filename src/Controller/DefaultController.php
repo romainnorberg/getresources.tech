@@ -39,7 +39,15 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
-        $sites = $this->indexManager->rawSearch('', Site::class);
+        $sites = $this->indexManager->rawSearch(
+            '', // query
+            Site::class, // class
+            1, // page
+            12, // nb results
+            [
+                'filters' => 'isValidated=1' // https://www.algolia.com/doc/api-reference/api-parameters/filters/
+            ] // parameters
+        );
 
         return $this->render('default/index.html.twig', [
             'sites' => $sites['hits'], // raw search

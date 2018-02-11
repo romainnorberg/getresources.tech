@@ -1,5 +1,20 @@
 {% include 'includes/header.html.twig' %}
 
+{% block notification %}
+    {% if app.session is not null and app.session.started %}
+        {% set flashSuccess = app.session.flashbag.get("success") %}
+        {% if flashSuccess is not empty %}
+                <div class="notification help is-success" style="margin: 0;text-align: center;">
+                    {% for message in flashSuccess %}
+                        <div class="is-size-4">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
 {% block navbar %}
     {% include 'includes/navbar.html.twig' %}
 {% endblock %}

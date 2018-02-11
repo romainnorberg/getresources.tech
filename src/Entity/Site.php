@@ -34,6 +34,9 @@ class Site
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
+     * @Assert\Url(
+     *    message = "The url '{{ value }}' is not a valid url",
+     * )
      */
     private $url;
 
@@ -44,8 +47,8 @@ class Site
     private $description;
 
     /**
+     * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\NotBlank()
      */
     private $slug;
 

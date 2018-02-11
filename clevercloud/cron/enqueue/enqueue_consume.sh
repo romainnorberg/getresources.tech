@@ -20,13 +20,21 @@
 #
 source /home/bas/applicationrc
 
-echo "====="
-echo "Running clevercloud/hook/run_succeeded.sh...(INSTANCE_TYPE: ${INSTANCE_TYPE})"
-
 # run only on first production instance
 if [ -n ${INSTANCE_TYPE} ] && [ ${INSTANCE_TYPE} = 'production' ]  && [ -n ${INSTANCE_NUMBER} ] && [ ${INSTANCE_NUMBER} -eq 0 ]
 then
-  echo "..."
+  status=`ps -efww | grep -w "[e]nqueue:consume" | awk -vpid=$$ '$2 != pid { print $2 }'`
+  if [ ! -z "$status" ]; then
+      echo "[`date`] : enqueue:consume : Process is already running"
+      exit 1;
+  fi
+
+  # Log path
+  enqueue_log_path="${APP_HOME}/clevercloud/buckets/logs/server/enqueue_${INSTANCE_ID}.log"
+
+  # Running
+  echo "running enqueue:consume... (log into ${enqueue_log_path})"
+  /usr/bin/php ${APP_HOME}/bin/console enqueue:consume -vv >> ${enqueue_log_path} &
 fi
 
 echo "====="

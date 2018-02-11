@@ -1,0 +1,3 @@
+[
+  "*/5 * * * * /usr/bin/sh $ROOT/clevercloud/cron/enqueue/enqueue_consume.sh"
+]

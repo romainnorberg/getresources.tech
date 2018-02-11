@@ -21,14 +21,9 @@
             <div class="columns">
                 <div class="column is-10 is-offset-1">
                     <div class="content">
-                        <div class="notification is-warning">
-                            <ul>
-                                <li>
-                                    error message
-                                </li>
-                            </ul>
-                        </div>
-
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        {{ form_end(form) }}
                     </div>
                 </div>
             </div>

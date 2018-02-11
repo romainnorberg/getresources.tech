@@ -75,13 +75,20 @@ p.separator-text
           color: $grey-lighter
       .beta
         margin-left: 10px
-        letter-spacing: 0px
+        letter-spacing: 0
 
 /*  |- Card */
 .card
   height: 100%
 
 /* Elements */
+/*  |- Form */
+form
+  label
+    &.required:after
+      content: '*'
+      margin-left: 2px
+      color: $grey-light
 /*  |- Tags */
 
 footer
