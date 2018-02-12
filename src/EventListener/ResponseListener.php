@@ -47,13 +47,5 @@ class ResponseListener implements EventSubscriberInterface
             $response->setContent($content);
             $response->headers->set('Content-encoding', 'deflate');
         }
-
-        // Cache control
-        if ($this->kernel->getEnvironment() === 'prod') {
-            $response->setPublic();
-            $response->setMaxAge(600);
-            $response->setSharedMaxAge(600);
-            $response->headers->addCacheControlDirective('must-revalidate');
-        }
     }
 }

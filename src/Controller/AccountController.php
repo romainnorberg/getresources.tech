@@ -36,7 +36,7 @@ class AccountController extends Controller
     /**
      * @Route("/account", name="account")
      * @param Request $request
-     * @Cache(maxage="0", smaxage="0", public=true)
+     * @Cache(maxage="0", smaxage="0", public=false, mustRevalidate=true)
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

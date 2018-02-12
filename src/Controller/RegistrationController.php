@@ -40,7 +40,7 @@ class RegistrationController extends Controller
      * @param Request             $request
      * @param TranslatorInterface $translator
      *
-     * @Cache(maxage="0", smaxage="0", public=true)
+     * @Cache(maxage="0", smaxage="0", public=false, mustRevalidate=true)
      * @throws \Symfony\Component\Form\Exception\LogicException
      * @throws \LogicException
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException

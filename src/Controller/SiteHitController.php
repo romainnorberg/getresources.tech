@@ -33,7 +33,7 @@ class SiteHitController extends AbstractController
     }
 
     /**
-     * @Cache(maxage="0", smaxage="0", public=true)
+     * @Cache(maxage="0", smaxage="0", public=false, mustRevalidate=true)
      * @Route("/open/{siteSlug}", name="site_hit_open")
      */
     public function index($siteSlug): Response

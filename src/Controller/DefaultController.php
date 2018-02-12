@@ -34,7 +34,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="homepage")
      *
-     * @Cache(maxage="0", smaxage="0", public=true)
+     * @Cache(maxage="0", smaxage="0", public=false, mustRevalidate=true)
      * @return Response
      * @throws \LogicException
      * @throws \InvalidArgumentException

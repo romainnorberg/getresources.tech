@@ -17,7 +17,7 @@ class SecurityController extends Controller
      * @param AuthenticationUtils $authUtils
      * @param TranslatorInterface $translator
      *
-     * @Cache(maxage="0", smaxage="0", public=true)
+     * @Cache(maxage="0", smaxage="0", public=false, mustRevalidate=true)
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      * @throws \Symfony\Component\Routing\Exception\RouteNotFoundException
