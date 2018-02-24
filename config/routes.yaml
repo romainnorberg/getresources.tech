@@ -1,2 +1,7 @@
 logout:
     path: /logout
+
+backend:
+    resource: '../src/Controller/AdminController.php'
+    prefix: /admin
+    type: annotation

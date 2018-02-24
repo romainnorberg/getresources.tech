@@ -148,6 +148,11 @@ class Site
      */
     private $sources;
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * @return string
      */
@@ -169,7 +174,7 @@ class Site
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {

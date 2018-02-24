@@ -10,6 +10,18 @@ App\Entity\User:
         plain_password: <password()>
 
     user_admin (extends user):
+        email: obins.admin@example.com
+        username: obins_admin
+        plain_password: '12345'
+        roles:
+            - 'ROLE_USER'
+            - 'ROLE_ADMIN'
+
+    user_super_admin (extends user):
         email: john@malkovich.com
         username: jmalkovich
         plain_password: '12345'
+        roles:
+            - 'ROLE_USER'
+            - 'ROLE_ADMIN'
+            - 'ROLE_SUPER_ADMIN'

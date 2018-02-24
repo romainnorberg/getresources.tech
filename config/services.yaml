@@ -44,6 +44,11 @@ services:
         autowire: false
         public: true
 
+    App\Controller\AccountController:
+        arguments: ['@doctrine.orm.default_entity_manager', '@enqueue.client.producer']
+        autowire: false
+        public: true
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\EventListener\ResponseListener:

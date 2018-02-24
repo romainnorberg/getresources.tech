@@ -12,4 +12,4 @@ bin/console search:import -i sites --env=test -v
 
 sleep 5 # leave time to Algolia index
 
-./vendor/phpunit/phpunit/phpunit --testdox
+./vendor/phpunit/phpunit/phpunit --testdox --stderr

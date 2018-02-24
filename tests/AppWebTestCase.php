@@ -7,10 +7,14 @@ use Enqueue\Client\TraceableProducer;
 use Enqueue\Consumption\QueueConsumer;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class AppWebTestCase extends WebTestCase
 {
+    public const ADMIN_USERNAME = 'jmalkovich';
+
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Client
      */
@@ -60,5 +64,39 @@ class AppWebTestCase extends WebTestCase
     public function getProducer()
     {
         return $this->client->getContainer()->get('enqueue.producer');
+    }
+
+    /**
+     * Login user with his username
+     *
+     * @param string $userName
+     * @param array  $sessionParams
+     */
+    public function logIn($userName = self::ADMIN_USERNAME, array $sessionParams = [])
+    {
+
+        $session = $this->client->getContainer()->get('session');
+
+        // the firewall context defaults to the firewall name
+        $firewallContext = 'main';
+
+        /* @var $user \App\Entity\User */
+        $user = $this->em
+            ->getRepository('App:User')
+            ->findOneBy([
+                'username' => $userName,
+            ]);
+
+        // Session
+        $token = new UsernamePasswordToken($user, null, $firewallContext, $user->getRoles());
+        $session->set('_security_' . $firewallContext, serialize($token));
+        foreach ($sessionParams as $name => $value) {
+            $session->set($name, $value);
+        }
+        $session->save();
+
+        $cookie = new Cookie($session->getName(), $session->getId());
+
+        $this->client->getCookieJar()->set($cookie);
     }
 }

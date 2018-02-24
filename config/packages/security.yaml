@@ -32,7 +32,6 @@ security:
         - { path: ^/account, roles: ROLE_USER }
         - { path: ^/submit, roles: ROLE_USER } # site submit form
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/admin/users, roles: ROLE_SUPER_ADMIN }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
     role_hierarchy:

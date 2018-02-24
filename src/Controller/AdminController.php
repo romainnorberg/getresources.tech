@@ -2,22 +2,28 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as EasyAdminController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends Controller
+class AdminController extends EasyAdminController
 {
+    public const USER_ENTITY = 'User';
+
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/admin", name="easyadmin")
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
-    public function indexAction(Request $request): \Symfony\Component\HttpFoundation\Response
+    public function indexAction(Request $request)
     {
-        return $this->render(
-            'admin/index.html.twig'
-        );
+        // check user role to manage Users
+        if ($request->get('entity') === self::USER_ENTITY) {
+            $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        }
+
+        return parent::indexAction($request);
     }
 }

@@ -27,7 +27,7 @@ class AccountController extends Controller
      * @param EntityManagerInterface $em
      * @param Producer               $producer
      */
-    public function __construct(EntityManagerInterface $em, Producer $producer)
+    public function __construct(EntityManagerInterface $em, $producer)
     {
         $this->em = $em;
         $this->producer = $producer;

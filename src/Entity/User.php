@@ -38,7 +38,6 @@ class User implements UserInterface, \Serializable
     private $username;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
@@ -55,6 +54,11 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="is_active", type="boolean", options={"default":false})
      */
     private $isActive;
+
+    /**
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = ['ROLE_USER'];
 
     /**
      * @var \DateTime
@@ -87,6 +91,26 @@ class User implements UserInterface, \Serializable
     public function __toString()
     {
         return $this->getUsername();
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return User
+     */
+    public function setId(string $id): User
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -162,11 +186,6 @@ class User implements UserInterface, \Serializable
         $this->password = $password;
 
         return $this;
-    }
-
-    public function getRoles()
-    {
-        return ['ROLE_USER'];
     }
 
     public function eraseCredentials()
@@ -254,9 +273,29 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return \DateTime
+     * @return mixed
      */
-    public function getLastLogin(): \DateTime
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param mixed $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return null|\DateTime
+     */
+    public function getLastLogin(): ?\DateTime
     {
         return $this->lastLogin;
     }
@@ -266,7 +305,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setLastLogin(\DateTime $lastLogin): User
+    public function setLastLogin(\DateTime $lastLogin = null): User
     {
         $this->lastLogin = $lastLogin;
 

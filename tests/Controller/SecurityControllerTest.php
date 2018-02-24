@@ -78,7 +78,10 @@ class SecurityControllerTest extends AppWebTestCase
      * @dataProvider usernameProvider
      * @depends      testSubmitRegisterFormWithInvalidPassword
      *
+     * @param $loginUsername
      * @param $username
+     *
+     * @throws \Exception
      */
     public function testLoginActionLoginForm($loginUsername, $username)
     {
