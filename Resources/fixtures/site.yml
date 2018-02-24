@@ -9,26 +9,22 @@ App\Entity\Site:
         name: 'JavaScript ES6+: var let or const?'
         url: 'https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75'
         description: 'Perhaps the most important thing you can learn to be a better coder is to keep things simple. In the context of identifiers that means that a single identifier should only be used to represent a single concept.'
-        slug: 'javascript-es6-var-let-or-const-ba58b8dcde75'
 
     site_2 (extends site):
         name: 'Cssreference.io: A free visual guide to CSS'
         url: 'http://cssreference.io/'
         description: 'Learn by example: cssreference.io is a free visual guide to CSS. It features the most popular properties and explains them with illustrated and animated examples.'
-        slug: 'cssreference.io-ba58b8dcde75'
 
     site_3 (extends site):
         name: 'Why npm Scripts?'
         url: 'https://css-tricks.com/why-npm-scripts/'
         description: ''
-        slug: 'why-npm-scripts-ba58b8dcde75'
         published_at: <dateTime('2016-02-12T00:00:00Z')>
 
     site_4 (extends site):
         name: 'Easy Node Authentication: Setup and Local'
         url: 'https://scotch.io/tutorials/easy-node-authentication-setup-and-local'
         description: ''
-        slug: 'easy-node-authentication-setup-and-local-ba58b8dcde75'
         author: 'Chris Sevilleja'
         author_url: 'https://twitter.com/chrisoncode'
         published_at: <dateTime('2016-07-12T00:00:00Z')>
@@ -37,7 +33,6 @@ App\Entity\Site:
         name: 'Building a Website from Scratch with ExpressJS and Bootstrap'
         url: 'https://www.codementor.io/codeforgeek/build-website-from-scratch-using-expressjs-and-bootstrap-du107sby7'
         description: ''
-        slug: 'build-website-from-scratch-using-expressjs-and-bootstrap-du107sby7'
         author: 'Samer Buna'
         author_url: 'https://www.codementor.io/samerbuna'
         published_at: <dateTime('2017-10-26T00:00:00Z')>
@@ -46,12 +41,10 @@ App\Entity\Site:
         name: 'Group Chat with ActionCable: Part 1'
         url: 'https://gorails.com/episodes/group-chat-with-actioncable-part-1'
         description: ''
-        slug: 'group-chat-with-actioncable-part-1-du107sby7'
         published_at: <dateTime('2017-10-26T00:00:00Z')>
 
     site_7 (extends site):
         name: 'Realtime Group Chat With ActionCable Series'
         url: 'https://gorails.com/series/realtime-group-chat-with-actioncable'
         description: ''
-        slug: 'realtime-group-chat-with-actioncable-series-du107sby7'
         published_at: <dateTime('2017-10-26T00:00:00Z')>

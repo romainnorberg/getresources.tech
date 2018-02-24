@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Utils\SiteUtils;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -47,7 +48,7 @@ class Site
     private $description;
 
     /**
-     * @Gedmo\Slug(fields={"name"})
+     * @Gedmo\Slug(fields={"name","author"})
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $slug;
@@ -585,5 +586,13 @@ class Site
         $this->sources = $sources;
 
         return $this;
+    }
+
+    /**
+     * @return SiteUtils
+     */
+    public function getUtils(): SiteUtils
+    {
+        return new SiteUtils($this);
     }
 }

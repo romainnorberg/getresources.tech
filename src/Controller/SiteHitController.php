@@ -7,9 +7,9 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Enqueue\Client\Producer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use League\Uri;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class SiteHitController extends AbstractController
@@ -17,7 +17,7 @@ class SiteHitController extends AbstractController
     /* @var EntityManager */
     private $em;
 
-    /** @var \Enqueue\Client\Producer $producer * */
+    /** @var \Enqueue\Client\Producer $producer */
     private $producer;
 
     /**
@@ -26,7 +26,7 @@ class SiteHitController extends AbstractController
      * @param EntityManagerInterface $em
      * @param Producer               $producer
      */
-    public function __construct(EntityManagerInterface $em, Producer $producer)
+    public function __construct(EntityManagerInterface $em, $producer)
     {
         $this->em = $em;
         $this->producer = $producer;
@@ -35,30 +35,38 @@ class SiteHitController extends AbstractController
     /**
      * @Cache(maxage="0", smaxage="0", public=false, mustRevalidate=true)
      * @Route("/open/{siteSlug}", name="site_hit_open")
+     * @param         $siteSlug
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|NotFoundHttpException
+     * @throws \LogicException
      */
-    public function index($siteSlug): Response
+    public function index($siteSlug, Request $request)
     {
         $siteRepository = $this->em->getRepository('App:Site');
 
         // find by slug
+        /* @var $site \App\Entity\Site */
         $site = $siteRepository->findOneBy([
             'slug' => $siteSlug,
         ]);
 
         // check
-        // TODO
+        if (null === $site) {
+            return new NotFoundHttpException('Site not found');
+        }
 
         // log hit in queue (async)
-        // TODO
         $siteHitProcessorVo = new SiteHitProcessorVo();
-        $siteHitProcessorVo->uniqId = uniqid('siteHit_', true);
+        $siteHitProcessorVo->populateFromRequest($request);
+        $siteHitProcessorVo->siteId = $site->getId();
+        $siteHitProcessorVo->userId = $this->getUser() ? $this->getUser()->getId() : null;
         $this->producer->sendEvent('aSiteHitTopic', $siteHitProcessorVo);
 
         // generate url
         // TODO: refactor
-        $siteUrl = Uri\Http::createFromString($site->getUrl());
-        $siteUrl = Uri\merge_query($siteUrl, 'utm_source=getresources.tech');
-        $siteUrl = Uri\merge_query($siteUrl, 'utm_medium=site');
+        $siteUrl = $site->getUtils()->getUrlWithExtra();
 
         // redirect to site
         return $this->redirect($siteUrl);

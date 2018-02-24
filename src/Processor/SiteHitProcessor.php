@@ -22,7 +22,7 @@ class SiteHitProcessor implements PsrProcessor, TopicSubscriberInterface
     /**
      * DefaultController constructor.
      *
-     * @param IndexManager           $indexManager
+     * @param IndexManager $indexManager
      */
     public function __construct(IndexManager $indexManager)
     {
@@ -53,8 +53,6 @@ class SiteHitProcessor implements PsrProcessor, TopicSubscriberInterface
      */
     private function execute()
     {
-        //throw new \Exception('putain');
-
         $messageBody = json_decode($this->message->getBody(), true);
         $jsonError = json_last_error();
 

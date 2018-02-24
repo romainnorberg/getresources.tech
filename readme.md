@@ -28,8 +28,15 @@ doc: http://symfony.com/doc/current/frontend.html
 - `APP_ENV=test php bin/console hautelook:fixtures:load -n -vv`
 
 #### Run
-- `php bin/phpunit`
-- (optionnal) `php bin/phpunit --coverage-clover=coverage.xml`
+
+Tests can be run with command 
+
+- `./vendor/phpunit/phpunit/phpunit --testdox`
+- (optionnal) `./vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.xml`
+
+or for one file : 
+
+`./vendor/phpunit/phpunit/phpunit tests/Controller/DefaultControllerTest.php --testdox`
 
 #### Shorcut (test)
 - `sh tests/runTests.sh`

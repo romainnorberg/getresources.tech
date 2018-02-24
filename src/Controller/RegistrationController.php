@@ -20,7 +20,7 @@ class RegistrationController extends Controller
     /* @var EntityManager */
     private $em;
 
-    /** @var \Enqueue\Client\Producer $producer * */
+    /** @var \Enqueue\Client\Producer $producer */
     private $producer;
 
     /**
@@ -29,7 +29,7 @@ class RegistrationController extends Controller
      * @param EntityManagerInterface $em
      * @param Producer               $producer
      */
-    public function __construct(EntityManagerInterface $em, Producer $producer)
+    public function __construct(EntityManagerInterface $em, $producer)
     {
         $this->em = $em;
         $this->producer = $producer;

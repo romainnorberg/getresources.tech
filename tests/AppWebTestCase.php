@@ -3,6 +3,8 @@
 namespace App\Tests;
 
 use Doctrine\ORM\EntityManager;
+use Enqueue\Client\TraceableProducer;
+use Enqueue\Consumption\QueueConsumer;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Dotenv\Dotenv;
@@ -17,12 +19,17 @@ class AppWebTestCase extends WebTestCase
     /**
      * @var EntityManager
      */
-    public $em;
+    protected $em;
 
     /**
      * @var ContainerInterface
      */
     protected $container;
+
+    /**
+     * @var QueueConsumer
+     */
+    protected $consumer;
 
     public function setUp()
     {
@@ -33,6 +40,7 @@ class AppWebTestCase extends WebTestCase
             ->getManager('default');
 
         $this->client = static::createClient();
+        $this->consumer = static::$kernel->getContainer()->get('enqueue.consumption.queue_consumer');
         $this->container = $this->client->getContainer();
     }
 
@@ -44,5 +52,13 @@ class AppWebTestCase extends WebTestCase
         (new Dotenv())->load(__DIR__ . '/../.env.test');
 
         return parent::createClient($options, $server);
+    }
+
+    /**
+     * @return TraceableProducer
+     */
+    public function getProducer()
+    {
+        return $this->client->getContainer()->get('enqueue.producer');
     }
 }

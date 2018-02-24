@@ -33,6 +33,16 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    # manual declare because we can hint Producer or TraceableProducer for argument 2 (TraceableProducer on test env.)
+    App\Controller\SiteHitController:
+        arguments: ['@doctrine.orm.default_entity_manager', '@enqueue.client.producer']
+        autowire: false
+        public: true
+
+    App\Controller\RegistrationController:
+        arguments: ['@doctrine.orm.default_entity_manager', '@enqueue.client.producer']
+        autowire: false
+        public: true
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -24,3 +24,7 @@
 
 # Various
 dump.rdb
+
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###

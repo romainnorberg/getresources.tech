@@ -6,7 +6,7 @@ enqueue:
             #dsn: "redis://%env(REDIS_HOST)%:%env(REDIS_PORT)%" # no password
             vendor: predis
     client:
-        prefix: cust_report
-        app_name: cust_app
-        router_queue: cust
-        default_processor_queue: cust
+        prefix: enqueue
+        app_name: gr
+        router_queue: default
+        default_processor_queue: default

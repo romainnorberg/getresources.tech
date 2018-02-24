@@ -38,7 +38,8 @@
         "symfony/phpunit-bridge": "^4.0",
         "symfony/profiler-pack": "^1.0",
         "symfony/web-server-bundle": "^4.0",
-        "symfony/webpack-encore-pack": "^1.0"
+        "symfony/webpack-encore-pack": "^1.0",
+        "phpunit/phpunit": "^7.0"
     },
     "config": {
         "preferred-install": {

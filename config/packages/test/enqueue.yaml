@@ -1,0 +1,4 @@
+enqueue:
+    client:
+        prefix: test_enqueue
+        traceable_producer: true # https://github.com/php-enqueue/enqueue-dev/blob/master/docs/bundle/functional_testing.md#traceable-message-producer
