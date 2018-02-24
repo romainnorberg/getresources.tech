@@ -57,7 +57,7 @@ script:
   - php bin/console search:clear -i sites -v
   - php bin/console search:import -i sites -v
   - sleep 5 # leave time to Algolia to index
-  - php ./vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.xml
+  - php ./vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.xml --stderr
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
