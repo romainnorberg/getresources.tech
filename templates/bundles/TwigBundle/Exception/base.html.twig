@@ -1,0 +1,15 @@
+{% include 'includes/header.html.twig' %}
+
+
+<section class="hero is-fullheight is-primary">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+    <div class="hero-foot">
+        {% include 'includes/navbar.html.twig' %}
+    </div>
+</section>
+
+{% include 'includes/footer.html.twig' %}

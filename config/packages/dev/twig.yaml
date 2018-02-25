@@ -1,0 +1,3 @@
+_errors:
+    resource: '@TwigBundle/Resources/config/routing/errors.xml' # doc: https://symfony.com/doc/current/controller/error_pages.html
+    prefix:   /_error

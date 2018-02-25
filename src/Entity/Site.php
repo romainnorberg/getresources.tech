@@ -366,7 +366,7 @@ class Site
      *
      * @return Site
      */
-    public function setPublishedAt(\DateTime $publishedAt): Site
+    public function setPublishedAt(\DateTime $publishedAt = null): Site
     {
         $this->publishedAt = $publishedAt;
 
@@ -406,7 +406,7 @@ class Site
      *
      * @return Site
      */
-    public function setValidatedAt(\DateTime $validatedAt): Site
+    public function setValidatedAt(\DateTime $validatedAt = null): Site
     {
         $this->validatedAt = $validatedAt;
 
