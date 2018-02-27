@@ -8,9 +8,10 @@ monolog:
                 # regex: exclude all 404 errors from the logs
                 - ^/
         file_handler:
-            type: stream
+            type: rotating_file
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+            max_files: 10
 
         console:
             type:   console

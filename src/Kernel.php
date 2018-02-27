@@ -30,7 +30,7 @@ class Kernel extends BaseKernel
 
     public function getLogDir()
     {
-        return $this->getProjectDir() . '/var/log';
+        return $this->getProjectDir() . '/clevercloud/buckets/logs'; // bucket system
     }
 
     public function registerBundles()
