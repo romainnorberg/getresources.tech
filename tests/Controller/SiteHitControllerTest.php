@@ -5,7 +5,6 @@ namespace App\Tests\Controller;
 use App\Repository\SiteRepository;
 use App\Tests\AppWebTestCase;
 use App\Vo\SiteHitProcessorVo;
-use Enqueue\Consumption\QueueConsumer;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SiteHitControllerTest extends AppWebTestCase
