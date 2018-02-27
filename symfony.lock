@@ -254,6 +254,9 @@
     "ramsey/uuid": {
         "version": "3.7.3"
     },
+    "rollbar/rollbar": {
+        "version": "v1.4.0"
+    },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"
     },

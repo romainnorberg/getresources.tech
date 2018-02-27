@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Rollbar\Rollbar;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -10,7 +11,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 
 class Kernel extends BaseKernel
 {
-    public const DEFAULT_TIMEZONE       = '+00:00';
+    public const DEFAULT_TIMEZONE = '+00:00';
     public const DEFAULT_TIMEZONE_LABEL = 'GMT';
 
     use MicroKernelTrait;
@@ -20,7 +21,20 @@ class Kernel extends BaseKernel
     public function __construct($environment, $debug)
     {
         date_default_timezone_set(self::DEFAULT_TIMEZONE_LABEL);
+
+        $this->addRollbar($environment);
+
         parent::__construct($environment, $debug);
+    }
+
+    private function addRollbar($environment)
+    {
+        if (isset($_ENV['ROLLBAR_ACCESS_TOKEN']) && !\in_array($environment, ['test'], true)) {
+            $config = [
+                'environment' => $environment,
+            ];
+            Rollbar::init($config);
+        }
     }
 
     public function getCacheDir()
