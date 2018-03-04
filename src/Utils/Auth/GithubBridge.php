@@ -75,6 +75,8 @@ class GithubBridge
         dump($githubUserDetails);
         //die();
 
+        // create user if not exist (check if no provided email)
+
         // set user as loggued
 
     }
