@@ -79,3 +79,9 @@ services:
         tags:
             - { name: 'enqueue.client.processor' }
         public: true
+
+    App\Utils\Auth\Github:
+        public: true
+
+    App\Utils\Auth\GithubBridge:
+        public: true

@@ -4,10 +4,11 @@
     "require": {
         "php": "^7.2",
         "ext-iconv": "*",
-        "algolia/algolia-search-bundle": "3.0.0",
+        "algolia/algolia-search-bundle": "^3.0.0",
         "easycorp/easyadmin-bundle": "^1.17",
         "enqueue/enqueue-bundle": "^0.8.17",
         "enqueue/redis": "^0.8.12",
+        "guzzlehttp/guzzle": "^6.3",
         "league/uri": "^5.2",
         "predis/predis": "^1.1",
         "rollbar/rollbar": "^1.4",
