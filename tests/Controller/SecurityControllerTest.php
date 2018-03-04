@@ -10,7 +10,10 @@ class SecurityControllerTest extends AppWebTestCase
 {
     private $filterXPathForm = "//*[@name='login_form']";
 
-    public function testSubmitLoginFormWithMissingPassword()
+    /**
+     * @covers SecurityController::loginAction()
+     */
+    public function testSubmitLoginFormWithMissingPassword(): void
     {
         $url = $this->client->getContainer()->get('router')->generate('login', []);
         $crawler = $this->client->request('GET', $url);
@@ -39,9 +42,10 @@ class SecurityControllerTest extends AppWebTestCase
     }
 
     /**
+     * @covers  SecurityController::loginAction()
      * @depends testSubmitLoginFormWithMissingPassword
      */
-    public function testSubmitRegisterFormWithInvalidPassword()
+    public function testSubmitRegisterFormWithInvalidPassword(): void
     {
         $url = $this->client->getContainer()->get('router')->generate('login', []);
         $crawler = $this->client->request('GET', $url);
@@ -74,7 +78,7 @@ class SecurityControllerTest extends AppWebTestCase
     /**
      * You can login with username OR email address
      *
-     * @covers       \App\Controller\SecurityController::login()
+     * @covers       SecurityController::loginAction()
      * @dataProvider usernameProvider
      * @depends      testSubmitRegisterFormWithInvalidPassword
      *
@@ -83,7 +87,7 @@ class SecurityControllerTest extends AppWebTestCase
      *
      * @throws \Exception
      */
-    public function testLoginActionLoginForm($loginUsername, $username)
+    public function testLoginActionLoginForm($loginUsername, $username): void
     {
         // Get Url
         $url = $this->client->getContainer()->get('router')->generate('login', []);

@@ -42,7 +42,7 @@ class SiteHitController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|NotFoundHttpException
      * @throws \LogicException
      */
-    public function index($siteSlug, Request $request)
+    public function indexAction($siteSlug, Request $request)
     {
         $siteRepository = $this->em->getRepository('App:Site');
 

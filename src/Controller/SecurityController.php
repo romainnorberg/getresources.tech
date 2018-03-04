@@ -29,7 +29,7 @@ class SecurityController extends Controller
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
      * @throws \InvalidArgumentException
      */
-    public function login(AuthenticationUtils $authUtils, TranslatorInterface $translator): \Symfony\Component\HttpFoundation\Response
+    public function loginAction(AuthenticationUtils $authUtils, TranslatorInterface $translator): \Symfony\Component\HttpFoundation\Response
     {
         if (true === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $url = $this->container->get('router')->generate('homepage');
@@ -54,7 +54,7 @@ class SecurityController extends Controller
      * @Route("/logout", name="logout")
      * @param Request $request
      */
-    public function logout(Request $request)
+    public function logoutAction(Request $request)
     {
 
     }
@@ -65,7 +65,7 @@ class SecurityController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function recoverPassword(Request $request)
+    public function recoverPasswordAction(Request $request)
     {
         return $this->render('security/recover_password.html.twig');
     }
@@ -76,7 +76,7 @@ class SecurityController extends Controller
      * @return RedirectResponse
      * @throws \InvalidArgumentException
      */
-    public function authWithGithub(): RedirectResponse
+    public function authWithGithubAction(): RedirectResponse
     {
         return $this->get(GithubBridge::class)->authorize();
     }
@@ -88,7 +88,7 @@ class SecurityController extends Controller
      * @throws \RuntimeException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function authWithGithubCallback(Request $request)
+    public function authWithGithubCallbackAction(Request $request)
     {
         $code = $request->get('code');
         $state = $request->get('state');

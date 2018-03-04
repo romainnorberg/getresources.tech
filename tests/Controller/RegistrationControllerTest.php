@@ -2,7 +2,9 @@
 
 namespace App\Tests\Controller;
 
+use App\Controller\RegistrationController;
 use App\Tests\AppWebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response;
 
 class RegistrationControllerTest extends AppWebTestCase
@@ -14,7 +16,7 @@ class RegistrationControllerTest extends AppWebTestCase
      *
      * @param $url
      */
-    public function testPageIsSuccessful($url)
+    public function testPageIsSuccessful($url): void
     {
         $this->client->request('GET', $url);
 
@@ -27,7 +29,12 @@ class RegistrationControllerTest extends AppWebTestCase
         yield ['/register'];
     }
 
-    public function testShowRegisterForm()
+    /**
+     * @covers RegistrationController::registerAction()
+     *
+     * @return Crawler
+     */
+    public function testShowRegisterForm(): Crawler
     {
         $url = $this->client->getContainer()->get('router')->generate('user_registration', []);
         $crawler = $this->client->request('GET', $url);
@@ -42,9 +49,12 @@ class RegistrationControllerTest extends AppWebTestCase
     }
 
     /**
+     * @covers  RegistrationController::registerAction()
      * @depends testShowRegisterForm
+     *
+     * @param $crawler
      */
-    public function testSubmitRegisterFormWithMissingField($crawler)
+    public function testSubmitRegisterFormWithMissingField(Crawler $crawler): void
     {
         $values = [
             'user_form[username]' => 'user-test',
@@ -56,9 +66,12 @@ class RegistrationControllerTest extends AppWebTestCase
     }
 
     /**
+     * @covers  RegistrationController::registerAction()
      * @depends testShowRegisterForm
+     *
+     * @param $crawler
      */
-    public function testSubmitRegisterFormWithDifferentPassword($crawler)
+    public function testSubmitRegisterFormWithDifferentPassword(Crawler $crawler): void
     {
         $values = [
             'user_form[username]'              => 'user-test',
@@ -72,9 +85,9 @@ class RegistrationControllerTest extends AppWebTestCase
         $this->assertContains('This value is not valid', $response->getContent());
     }
 
-    private function submitForm($crawler, $values)
+    private function submitForm(Crawler $crawler, $values)
     {
-        // Test 2: fill form with error
+        // fill form
         $form = $crawler->filterXPath($this->filterXPathForm)->form();
         $form->setValues($values);
         $this->client->submit($form);

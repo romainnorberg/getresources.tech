@@ -2,6 +2,7 @@
 
 namespace App\Tests\Repository;
 
+use App\Repository\UserRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -25,12 +26,13 @@ class UserRepositoryTest extends WebTestCase
 
     /**
      * @dataProvider usernameProvider
+     * @covers       UserRepository::loadUserByUsername()
      *
      * @param $username
      *
      * @throws NonUniqueResultException
      */
-    public function testLoadUserByUsername($username)
+    public function testLoadUserByUsername($username): void
     {
         try {
             $user = $this->repository->loadUserByUsername($username);

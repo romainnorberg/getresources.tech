@@ -2,7 +2,9 @@
 
 namespace App\Tests\Controller;
 
+use App\Controller\DefaultController;
 use App\Tests\AppWebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultControllerTest extends AppWebTestCase
@@ -12,7 +14,7 @@ class DefaultControllerTest extends AppWebTestCase
      *
      * @param $url
      */
-    public function testPageIsSuccessful($url)
+    public function testPageIsSuccessful($url): void
     {
         $this->client->request('GET', $url);
 
@@ -24,7 +26,12 @@ class DefaultControllerTest extends AppWebTestCase
         yield ['/'];
     }
 
-    public function testHomepage()
+    /**
+     * @covers DefaultController::indexAction()
+     *
+     * @return Crawler
+     */
+    public function testHomepage(): Crawler
     {
         $url = $this->client->getContainer()->get('router')->generate('homepage', []);
         $crawler = $this->client->request('GET', $url);

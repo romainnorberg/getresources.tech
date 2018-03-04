@@ -8,10 +8,12 @@ use App\Tests\AppWebTestCase;
 class UserTest extends AppWebTestCase
 {
     /**
+     * @covers User
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function testPersistSetsTimestamps()
+    public function testPersistSetsTimestamps(): void
     {
         $dateTime = new \DateTime('now');
 
@@ -30,7 +32,10 @@ class UserTest extends AppWebTestCase
         $this->em->flush();
     }
 
-    public function testToString()
+    /**
+     * @covers User::setUsername()
+     */
+    public function testToString(): void
     {
         $user = new User();
 
@@ -38,7 +43,10 @@ class UserTest extends AppWebTestCase
         $this->assertEquals('example', (string)$user);
     }
 
-    public function testUsername()
+    /**
+     * @covers User::setUsername()
+     */
+    public function testUsername(): void
     {
         $user = new User();
 
@@ -46,7 +54,10 @@ class UserTest extends AppWebTestCase
         $this->assertEquals('example', $user->getUsername());
     }
 
-    public function testEmail()
+    /**
+     * @covers User::setEmail()
+     */
+    public function testEmail(): void
     {
         $user = new User();
 
@@ -54,7 +65,10 @@ class UserTest extends AppWebTestCase
         $this->assertEquals('mail@example.org', $user->getEmail());
     }
 
-    public function testPassword()
+    /**
+     * @covers User::setPlainPassword()
+     */
+    public function testPassword(): void
     {
         $user = new User();
         $this->assertNull($user->getPassword());
@@ -64,7 +78,10 @@ class UserTest extends AppWebTestCase
         $this->assertNotEquals($password, $user->getPassword());
     }
 
-    public function testActivation()
+    /**
+     * @covers User
+     */
+    public function testActivation(): void
     {
         $user = new User();
         $this->assertTrue($user->getisActive());

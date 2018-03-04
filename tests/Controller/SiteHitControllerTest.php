@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use App\Controller\SiteHitController;
 use App\Repository\SiteRepository;
 use App\Tests\AppWebTestCase;
 use App\Vo\SiteHitProcessorVo;
@@ -22,6 +23,8 @@ class SiteHitControllerTest extends AppWebTestCase
     }
 
     /**
+     * @covers       SiteHitController::indexAction()
+     *
      * @dataProvider siteProvider()
      *
      * @param $siteSlug
@@ -29,7 +32,7 @@ class SiteHitControllerTest extends AppWebTestCase
      *
      * @throws \Exception
      */
-    public function testValidClick($siteSlug, array $headers = null)
+    public function testValidClick($siteSlug, array $headers = null): void
     {
         // Headers
         foreach ($headers as $key => $value) {

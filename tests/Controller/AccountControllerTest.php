@@ -2,12 +2,16 @@
 
 namespace App\Tests\Controller;
 
+use App\Controller\AccountController;
 use App\Tests\AppWebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class AccountControllerTest extends AppWebTestCase
 {
-    public function testIsSecureArea()
+    /**
+     * @covers AccountController::indexAction()
+     */
+    public function testIsSecureArea(): void
     {
         $url = $this->client->getContainer()->get('router')->generate('account', []);
         $this->client->request('GET', $url);
