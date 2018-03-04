@@ -2,7 +2,6 @@
 
 namespace App\Tests\Controller;
 
-use App\Controller\RegistrationController;
 use App\Tests\AppWebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +29,7 @@ class RegistrationControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers RegistrationController::registerAction
+     * @covers \App\Controller\RegistrationController::registerAction
      *
      * @return Crawler
      */
@@ -49,7 +48,7 @@ class RegistrationControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers  RegistrationController::registerAction
+     * @covers  \App\Controller\RegistrationController::registerAction
      * @depends testShowRegisterForm
      *
      * @param $crawler
@@ -66,7 +65,7 @@ class RegistrationControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers  RegistrationController::registerAction
+     * @covers  \App\Controller\RegistrationController::registerAction
      * @depends testShowRegisterForm
      *
      * @param $crawler

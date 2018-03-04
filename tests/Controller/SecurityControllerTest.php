@@ -11,7 +11,7 @@ class SecurityControllerTest extends AppWebTestCase
     private $filterXPathForm = "//*[@name='login_form']";
 
     /**
-     * @covers SecurityController::loginAction
+     * @covers \App\Controller\SecurityController::loginAction
      */
     public function testSubmitLoginFormWithMissingPassword(): void
     {
@@ -42,7 +42,7 @@ class SecurityControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers  SecurityController::loginAction
+     * @covers  \App\Controller\SecurityController::loginAction
      * @depends testSubmitLoginFormWithMissingPassword
      */
     public function testSubmitRegisterFormWithInvalidPassword(): void
@@ -78,7 +78,7 @@ class SecurityControllerTest extends AppWebTestCase
     /**
      * You can login with username OR email address
      *
-     * @covers       SecurityController::loginAction
+     * @covers       \App\Controller\SecurityController::loginAction
      * @dataProvider usernameProvider
      * @depends      testSubmitRegisterFormWithInvalidPassword
      *

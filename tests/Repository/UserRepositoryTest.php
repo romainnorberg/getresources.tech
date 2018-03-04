@@ -2,7 +2,6 @@
 
 namespace App\Tests\Repository;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -32,7 +31,7 @@ class UserRepositoryTest extends WebTestCase
 
     /**
      * @dataProvider usernameProvider
-     * @covers       UserRepository::loadUserByUsername
+     * @covers       \App\Repository\UserRepository::loadUserByUsername
      *
      * @param string $username
      *

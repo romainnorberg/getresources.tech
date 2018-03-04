@@ -2,14 +2,13 @@
 
 namespace App\Tests\Controller;
 
-use App\Controller\AccountController;
 use App\Tests\AppWebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class AccountControllerTest extends AppWebTestCase
 {
     /**
-     * @covers AccountController::indexAction
+     * @covers \App\Controller\AccountController::indexAction
      */
     public function testIsSecureArea(): void
     {

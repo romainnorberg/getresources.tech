@@ -2,14 +2,13 @@
 
 namespace App\Tests\Controller;
 
-use App\Controller\AdminController;
 use App\Tests\AppWebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminControllerTest extends AppWebTestCase
 {
     /**
-     * @covers AdminController::indexAction
+     * @covers \App\Controller\AdminController::indexAction
      *
      * @throws \Exception
      */
@@ -25,7 +24,7 @@ class AdminControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers AdminController::indexAction
+     * @covers \App\Controller\AdminController::indexAction
      *
      * @throws \Exception
      */
@@ -48,7 +47,7 @@ class AdminControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers AdminController::indexAction
+     * @covers \App\Controller\AdminController::indexAction
      *
      * @throws \Exception
      */

@@ -2,7 +2,6 @@
 
 namespace App\Tests\Controller;
 
-use App\Controller\DefaultController;
 use App\Tests\AppWebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +26,7 @@ class DefaultControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers DefaultController::indexAction
+     * @covers \App\Controller\DefaultController::indexAction
      *
      * @return Crawler
      */

@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
  * Class GithubUserResponseVoTest
  * @package App\Tests\Vo
  *
- * @covers  GithubUserResponseVo
+ * @covers  \App\Vo\Auth\GithubUserResponseVo
  */
 class GithubUserResponseVoTest extends TestCase
 {

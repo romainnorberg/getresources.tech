@@ -9,12 +9,12 @@ use PHPUnit\Framework\TestCase;
  * Class SiteHitProcessorVoTest
  * @package App\Tests\Vo
  *
- * @covers  SiteHitProcessorVo
+ * @covers  \App\Vo\SiteHitProcessorVo
  */
 class SiteHitProcessorVoTest extends TestCase
 {
     /**
-     * @covers SiteHitProcessorVo::__construct
+     * @covers \App\Vo\SiteHitProcessorVo::__construct
      */
     public function testConstructor(): void
     {

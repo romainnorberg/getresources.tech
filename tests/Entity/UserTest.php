@@ -8,7 +8,7 @@ use App\Tests\AppWebTestCase;
 class UserTest extends AppWebTestCase
 {
     /**
-     * @covers User
+     * @covers \App\Entity\User
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -33,7 +33,7 @@ class UserTest extends AppWebTestCase
     }
 
     /**
-     * @covers User::setUsername
+     * @covers \App\Entity\User::setUsername
      */
     public function testToString(): void
     {
@@ -44,7 +44,7 @@ class UserTest extends AppWebTestCase
     }
 
     /**
-     * @covers User::setUsername
+     * @covers \App\Entity\User::setUsername
      */
     public function testUsername(): void
     {
@@ -55,7 +55,7 @@ class UserTest extends AppWebTestCase
     }
 
     /**
-     * @covers User::setEmail
+     * @covers \App\Entity\User::setEmail
      */
     public function testEmail(): void
     {
@@ -66,7 +66,7 @@ class UserTest extends AppWebTestCase
     }
 
     /**
-     * @covers User::setPlainPassword
+     * @covers \App\Entity\User::setPlainPassword
      */
     public function testPassword(): void
     {

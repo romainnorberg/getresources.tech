@@ -23,7 +23,7 @@ class SiteHitControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers       SiteHitController::indexAction
+     * @covers       \App\Controller\SiteHitController::indexAction
      *
      * @dataProvider siteProvider()
      *
