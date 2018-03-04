@@ -2,7 +2,6 @@
 
 namespace App\Tests\Controller;
 
-use App\Controller\SiteHitController;
 use App\Repository\SiteRepository;
 use App\Tests\AppWebTestCase;
 use App\Vo\SiteHitProcessorVo;

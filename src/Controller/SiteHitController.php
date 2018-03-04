@@ -66,7 +66,6 @@ class SiteHitController extends AbstractController
         $this->producer->sendEvent('aSiteHitTopic', $siteHitProcessorVo);
 
         // generate url
-        // TODO: refactor
         $siteUrl = $site->getUtils()->getUrlWithExtra();
 
         // redirect to site

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Vo;
+namespace App\Tests\Vo\Auth;
 
 use App\Vo\Auth\GithubUserResponseVo;
 use PHPUnit\Framework\TestCase;

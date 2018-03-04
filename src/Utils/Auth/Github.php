@@ -11,17 +11,24 @@ class Github
     public $apiURLBase = 'https://api.github.com/';
     public $apiURLUser = 'https://api.github.com/user';
     public $defaultUserScope = 'read:user';
-    public $defaultUserAgent = 'getresources.tech (dev)';
+    public $defaultUserAgent = 'getresources.tech';
 
     private $authClientId;
     private $authClientSecret;
     private $authCallbackUrl;
 
-    public function __construct()
+    /**
+     * @var Client
+     */
+    private $client;
+
+    public function __construct(Client $client)
     {
         $this->authClientId = $_ENV['AUTH_GITHUB_CLIENT_ID'];
         $this->authClientSecret = $_ENV['AUTH_GITHUB_CLIENT_SECRET'];
         $this->authCallbackUrl = $_ENV['AUTH_GITHUB_CALLBACK_URL_PROTOCOL'] . $_ENV['AUTH_GITHUB_CALLBACK_URL'];
+
+        $this->client = $client;
     }
 
     /**
@@ -29,12 +36,17 @@ class Github
      *
      * Doc: https://developer.github.com/apps/building-oauth-apps/authorization-options-for-oauth-apps/
      *
-     * @param array|null $extraParams
+     * @param array $extraParams
      *
      * @return string
+     * @throws \InvalidArgumentException
      */
-    public function authorize(array $extraParams = null): string
+    public function authorize(array $extraParams): string
     {
+        if (!array_key_exists('state', $extraParams)) {
+            throw new \InvalidArgumentException('You should provide state value');
+        }
+
         $params = [
             'client_id'    => $this->authClientId,
             'redirect_uri' => $this->authCallbackUrl,
@@ -60,7 +72,6 @@ class Github
      */
     public function authenticate(string $code, string $state): array
     {
-        $client = new Client();
         $formParams = [
             'client_id'     => $this->authClientId,
             'client_secret' => $this->authClientSecret,
@@ -69,7 +80,7 @@ class Github
             'state'         => $state,
         ];
 
-        $res = $client->request('POST', $this->tokenURL, [
+        $res = $this->client->request('POST', $this->tokenURL, [
             'form_params' => $formParams,
             'headers'     => [
                 'Accept'     => 'application/json',
@@ -90,8 +101,6 @@ class Github
      */
     public function getUserDetails(string $accessToken): array
     {
-        $client = new Client();
-
         $headers = [
             'Authorization' => 'Bearer ' . $accessToken,
             'User-Agent'    => $this->defaultUserAgent,
@@ -99,7 +108,7 @@ class Github
             'Cache-Control' => 'no-cache',
         ];
 
-        $res = $client->request('GET', $this->apiURLUser, [
+        $res = $this->client->request('GET', $this->apiURLUser, [
             'headers' => $headers,
         ]);
 
