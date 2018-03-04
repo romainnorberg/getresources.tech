@@ -33,7 +33,7 @@ class UserTest extends AppWebTestCase
     }
 
     /**
-     * @covers User::setUsername()
+     * @covers User::setUsername
      */
     public function testToString(): void
     {
@@ -44,7 +44,7 @@ class UserTest extends AppWebTestCase
     }
 
     /**
-     * @covers User::setUsername()
+     * @covers User::setUsername
      */
     public function testUsername(): void
     {
@@ -55,7 +55,7 @@ class UserTest extends AppWebTestCase
     }
 
     /**
-     * @covers User::setEmail()
+     * @covers User::setEmail
      */
     public function testEmail(): void
     {
@@ -66,7 +66,7 @@ class UserTest extends AppWebTestCase
     }
 
     /**
-     * @covers User::setPlainPassword()
+     * @covers User::setPlainPassword
      */
     public function testPassword(): void
     {

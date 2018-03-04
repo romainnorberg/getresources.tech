@@ -7,6 +7,7 @@ use App\Form\Type\SiteSubmitType;
 use App\Vo\UserSubmitSiteVo;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Enqueue\Client\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -82,6 +83,7 @@ class AccountController extends Controller
             // Send thank mail (async)
             $UserSubmitSiteVo = new UserSubmitSiteVo();
             $UserSubmitSiteVo->uniqId = uniqid('userSubmitSite_', true);
+
             $this->producer->sendEvent('aUserSubmitSiteTopic', $UserSubmitSiteVo);
 
             // Redirect

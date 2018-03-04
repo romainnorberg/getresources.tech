@@ -30,7 +30,7 @@ class RegistrationControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers RegistrationController::registerAction()
+     * @covers RegistrationController::registerAction
      *
      * @return Crawler
      */
@@ -49,7 +49,7 @@ class RegistrationControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers  RegistrationController::registerAction()
+     * @covers  RegistrationController::registerAction
      * @depends testShowRegisterForm
      *
      * @param $crawler
@@ -66,7 +66,7 @@ class RegistrationControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers  RegistrationController::registerAction()
+     * @covers  RegistrationController::registerAction
      * @depends testShowRegisterForm
      *
      * @param $crawler

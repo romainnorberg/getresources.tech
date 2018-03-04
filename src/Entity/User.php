@@ -61,7 +61,7 @@ class User implements UserInterface, \Serializable
     private $roles = ['ROLE_USER'];
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -301,7 +301,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param \DateTime $lastLogin
+     * @param \DateTime|null $lastLogin
      *
      * @return User
      */

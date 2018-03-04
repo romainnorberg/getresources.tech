@@ -47,12 +47,12 @@ class GithubBridge
     }
 
     /**
-     * @param $code
-     * @param $state
+     * @param string $code
+     * @param string $state
      *
      * @throws \RuntimeException
      */
-    public function login($code, $state)
+    public function login(string $code, string $state)
     {
         // checks existing (code, state, ...)
         if (empty($code)) {
@@ -80,13 +80,13 @@ class GithubBridge
     }
 
     /**
-     * @param $code
-     * @param $state
+     * @param string $code
+     * @param string $state
      *
      * @return GithubAuthenticateResponseVo
      * @throws \RuntimeException
      */
-    public function authenticate($code, $state): GithubAuthenticateResponseVo
+    public function authenticate(string $code, string $state): GithubAuthenticateResponseVo
     {
         $authenticateResponse = $this->githubService->authenticate($code, $state);
 
@@ -97,12 +97,12 @@ class GithubBridge
     }
 
     /**
-     * @param $accessToken
+     * @param string $accessToken
      *
      * @return GithubUserResponseVo
      * @throws \RuntimeException
      */
-    public function getUserDetails($accessToken): GithubUserResponseVo
+    public function getUserDetails(string $accessToken): GithubUserResponseVo
     {
         $userDetails = $this->githubService->getUserDetails($accessToken);
 

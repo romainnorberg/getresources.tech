@@ -23,7 +23,7 @@ class SiteHitControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers       SiteHitController::indexAction()
+     * @covers       SiteHitController::indexAction
      *
      * @dataProvider siteProvider()
      *
@@ -76,7 +76,7 @@ class SiteHitControllerTest extends AppWebTestCase
 
     }
 
-    public function siteProvider()
+    public function siteProvider(): array
     {
         return [
             ['javascript-es6-var-let-or-const', [

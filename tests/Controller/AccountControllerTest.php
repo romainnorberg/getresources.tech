@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AccountControllerTest extends AppWebTestCase
 {
     /**
-     * @covers AccountController::indexAction()
+     * @covers AccountController::indexAction
      */
     public function testIsSecureArea(): void
     {

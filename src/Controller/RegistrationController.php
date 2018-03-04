@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Vo\UserRegistrationProcessorVo;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Enqueue\Client\Message;
 use Enqueue\Client\Producer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,6 +74,7 @@ class RegistrationController extends Controller
             // TODO
             $UserRegistrationProcessorVo = new UserRegistrationProcessorVo();
             $UserRegistrationProcessorVo->uniqId = uniqid('userRegistration_', true);
+
             $this->producer->sendEvent('aUserRegistrationTopic', $UserRegistrationProcessorVo);
 
             // set flash

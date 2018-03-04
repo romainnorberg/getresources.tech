@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class SiteHitProcessorVoTest extends TestCase
 {
     /**
-     * @covers SiteHitProcessorVo::__construct()
+     * @covers SiteHitProcessorVo::__construct
      */
     public function testConstructor(): void
     {
@@ -27,9 +27,9 @@ class SiteHitProcessorVoTest extends TestCase
     /**
      * @dataProvider dataProperties()
      *
-     * @param $property
+     * @param string $property
      */
-    public function testProperties($property): void
+    public function testProperties(string $property): void
     {
         $this->assertClassHasAttribute($property, SiteHitProcessorVo::class, "Class SiteHitProcessorVo has '$property' property.");
     }

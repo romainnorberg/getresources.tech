@@ -3,6 +3,7 @@
 namespace App\Tests\Repository;
 
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -13,26 +14,31 @@ class UserRepositoryTest extends WebTestCase
      */
     protected $repository;
 
+    /**
+     * @var EntityManager
+     */
+    protected $em;
+
     protected function setUp()
     {
         $kernel = static::createKernel();
         $kernel->boot();
 
-        $this->repository = $kernel
+        $this->em = $kernel
             ->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('App:User');
+            ->get('doctrine.orm.entity_manager');
+        $this->repository = $this->em->getRepository('App:User');
     }
 
     /**
      * @dataProvider usernameProvider
-     * @covers       UserRepository::loadUserByUsername()
+     * @covers       UserRepository::loadUserByUsername
      *
-     * @param $username
+     * @param string $username
      *
      * @throws NonUniqueResultException
      */
-    public function testLoadUserByUsername($username): void
+    public function testLoadUserByUsername(string $username): void
     {
         try {
             $user = $this->repository->loadUserByUsername($username);

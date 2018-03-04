@@ -27,7 +27,7 @@ class DefaultControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers DefaultController::indexAction()
+     * @covers DefaultController::indexAction
      *
      * @return Crawler
      */

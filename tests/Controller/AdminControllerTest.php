@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AdminControllerTest extends AppWebTestCase
 {
     /**
-     * @covers AdminController::indexAction()
+     * @covers AdminController::indexAction
      *
      * @throws \Exception
      */
@@ -25,7 +25,7 @@ class AdminControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers AdminController::indexAction()
+     * @covers AdminController::indexAction
      *
      * @throws \Exception
      */
@@ -48,7 +48,7 @@ class AdminControllerTest extends AppWebTestCase
     }
 
     /**
-     * @covers AdminController::indexAction()
+     * @covers AdminController::indexAction
      *
      * @throws \Exception
      */

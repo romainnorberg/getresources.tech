@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Vo\SiteHitProcessorVo;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Enqueue\Client\Message;
 use Enqueue\Client\Producer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,14 +36,13 @@ class SiteHitController extends AbstractController
     /**
      * @Cache(maxage="0", smaxage="0", public=false, mustRevalidate=true)
      * @Route("/open/{siteSlug}", name="site_hit_open")
-     * @param         $siteSlug
-     *
+     * @param string  $siteSlug
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|NotFoundHttpException
      * @throws \LogicException
      */
-    public function indexAction($siteSlug, Request $request)
+    public function indexAction(string $siteSlug, Request $request)
     {
         $siteRepository = $this->em->getRepository('App:Site');
 
@@ -62,6 +62,7 @@ class SiteHitController extends AbstractController
         $siteHitProcessorVo->populateFromRequest($request);
         $siteHitProcessorVo->siteId = $site->getId();
         $siteHitProcessorVo->userId = $this->getUser() ? $this->getUser()->getId() : null;
+
         $this->producer->sendEvent('aSiteHitTopic', $siteHitProcessorVo);
 
         // generate url

@@ -52,13 +52,13 @@ class Github
      *
      * Doc: https://developer.github.com/apps/building-oauth-apps/authorization-options-for-oauth-apps/
      *
-     * @param $code
-     * @param $state
+     * @param string $code
+     * @param string $state
      *
      * @return array
      * @throws \RuntimeException
      */
-    public function authenticate($code, $state): array
+    public function authenticate(string $code, string $state): array
     {
         $client = new Client();
         $formParams = [
@@ -81,12 +81,14 @@ class Github
     }
 
     /**
-     * @param $accessToken
+     * Doc: https://developer.github.com/v3/users/#get-the-authenticated-user
+     *
+     * @param string $accessToken
      *
      * @return array
      * @throws \RuntimeException
      */
-    public function getUserDetails($accessToken): array
+    public function getUserDetails(string $accessToken): array
     {
         $client = new Client();
 
