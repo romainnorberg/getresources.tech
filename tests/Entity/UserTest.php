@@ -79,7 +79,7 @@ class UserTest extends AppWebTestCase
     }
 
     /**
-     * @covers User
+     * @covers \App\Entity\User
      */
     public function testActivation(): void
     {
