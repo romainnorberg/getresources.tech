@@ -22,6 +22,8 @@ class SiteHitControllerTest extends AppWebTestCase
     }
 
     /**
+     * @covers       \App\Controller\SiteHitController::indexAction
+     *
      * @dataProvider siteProvider()
      *
      * @param $siteSlug
@@ -29,7 +31,7 @@ class SiteHitControllerTest extends AppWebTestCase
      *
      * @throws \Exception
      */
-    public function testValidClick($siteSlug, array $headers = null)
+    public function testValidClick($siteSlug, array $headers = null): void
     {
         // Headers
         foreach ($headers as $key => $value) {
@@ -73,7 +75,7 @@ class SiteHitControllerTest extends AppWebTestCase
 
     }
 
-    public function siteProvider()
+    public function siteProvider(): array
     {
         return [
             ['javascript-es6-var-let-or-const', [

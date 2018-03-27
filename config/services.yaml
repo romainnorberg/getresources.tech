@@ -64,7 +64,7 @@ services:
             - { name: authentication.success.listener }
 
     Algolia\SearchBundle\IndexManager:
-            alias: search.index_manager
+        alias: search.index_manager
 
     site_normalizer:
         class: App\Serializer\Normalizer\SiteNormalizer
@@ -78,4 +78,13 @@ services:
         class: App\Processor\SiteHitProcessor
         tags:
             - { name: 'enqueue.client.processor' }
+        public: true
+
+    GuzzleHttp\ClientInterface: # mandatory for Auth\Github
+        class: GuzzleHttp\Client
+
+    App\Utils\Auth\Github:
+        public: true
+
+    App\Utils\Auth\GithubBridge:
         public: true

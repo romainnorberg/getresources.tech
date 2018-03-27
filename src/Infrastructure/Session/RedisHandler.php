@@ -108,7 +108,7 @@ class RedisHandler implements \SessionHandlerInterface
 
     private function unlockSession()
     {
-        $this->redis->del($this->prefix . $this->lockKey);
+        $this->redis->del([$this->prefix . $this->lockKey]);
         $this->locked = false;
     }
 
@@ -155,7 +155,7 @@ class RedisHandler implements \SessionHandlerInterface
      */
     public function destroy($sessionId): bool
     {
-        $this->redis->del($this->getRedisKey($sessionId));
+        $this->redis->del([$this->getRedisKey($sessionId)]);
         $this->close();
 
         return true;

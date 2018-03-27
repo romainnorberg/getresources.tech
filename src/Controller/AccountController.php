@@ -82,6 +82,7 @@ class AccountController extends Controller
             // Send thank mail (async)
             $UserSubmitSiteVo = new UserSubmitSiteVo();
             $UserSubmitSiteVo->uniqId = uniqid('userSubmitSite_', true);
+
             $this->producer->sendEvent('aUserSubmitSiteTopic', $UserSubmitSiteVo);
 
             // Redirect

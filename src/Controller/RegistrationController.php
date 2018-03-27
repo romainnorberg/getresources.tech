@@ -73,6 +73,7 @@ class RegistrationController extends Controller
             // TODO
             $UserRegistrationProcessorVo = new UserRegistrationProcessorVo();
             $UserRegistrationProcessorVo->uniqId = uniqid('userRegistration_', true);
+
             $this->producer->sendEvent('aUserRegistrationTopic', $UserRegistrationProcessorVo);
 
             // set flash

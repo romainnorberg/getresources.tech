@@ -14,8 +14,14 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class ResponseListenerTest extends TestCase
 {
+    /**
+     * @var EventDispatcher
+     */
     private $dispatcher;
 
+    /**
+     * @var Kernel
+     */
     private $kernel;
 
     protected function setUp()
@@ -41,7 +47,7 @@ class ResponseListenerTest extends TestCase
      * @param string $value
      * @param        $expected
      */
-    public function testResponseEncoding($value, $expected)
+    public function testResponseEncoding($value, $expected): void
     {
         $listener = new ResponseListener($this->kernel);
         $this->dispatcher->addListener(KernelEvents::RESPONSE, [$listener, 'onKernelResponse'], 1);
@@ -63,7 +69,7 @@ class ResponseListenerTest extends TestCase
      *
      * @covers       \App\EventListener\ResponseListener::onKernelResponse
      */
-    public function testKernelSubRequest()
+    public function testKernelSubRequest(): void
     {
         $listener = new ResponseListener($this->kernel);
         $this->dispatcher->addListener(KernelEvents::RESPONSE, [$listener, 'onKernelResponse'], 1);

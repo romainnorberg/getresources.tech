@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use App\Utils\Auth\GithubBridge;
 
 class SecurityController extends Controller
 {
@@ -28,7 +29,7 @@ class SecurityController extends Controller
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
      * @throws \InvalidArgumentException
      */
-    public function login(AuthenticationUtils $authUtils, TranslatorInterface $translator): \Symfony\Component\HttpFoundation\Response
+    public function loginAction(AuthenticationUtils $authUtils, TranslatorInterface $translator): \Symfony\Component\HttpFoundation\Response
     {
         if (true === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $url = $this->container->get('router')->generate('homepage');
@@ -53,7 +54,7 @@ class SecurityController extends Controller
      * @Route("/logout", name="logout")
      * @param Request $request
      */
-    public function logout(Request $request)
+    public function logoutAction(Request $request)
     {
 
     }
@@ -61,9 +62,48 @@ class SecurityController extends Controller
     /**
      * @Route("/recover_password", name="user_recover_password")
      * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function recoverPassword(Request $request)
+    public function recoverPasswordAction(Request $request)
     {
         return $this->render('security/recover_password.html.twig');
+    }
+
+    /**
+     * @Route("/auth/github", name="auth_github")
+     *
+     * @return RedirectResponse
+     * @throws \InvalidArgumentException
+     */
+    public function authWithGithubAction(): RedirectResponse
+    {
+        return $this->get(GithubBridge::class)->authorize();
+    }
+
+    /**
+     * @Route("/auth/github/callback", name="auth_github_callback")
+     * @param Request $request
+     *
+     * @throws \RuntimeException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function authWithGithubCallbackAction(Request $request)
+    {
+        $code = $request->get('code');
+        $state = $request->get('state');
+
+        if (empty($code)) {
+            throw $this->createNotFoundException();
+        }
+
+        if (empty($state)) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->get(GithubBridge::class)->login($code, $state);
+
+
+        die();
     }
 }

@@ -79,7 +79,7 @@ class Site
     private $parent;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -91,7 +91,7 @@ class Site
     private $isValidated;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -362,7 +362,8 @@ class Site
     }
 
     /**
-     * @param \DateTime $publishedAt
+     *
+     * @param \DateTime|null $publishedAt
      *
      * @return Site
      */
@@ -402,7 +403,8 @@ class Site
     }
 
     /**
-     * @param \DateTime $validatedAt
+     *
+     * @param \DateTime|null $validatedAt
      *
      * @return Site
      */
