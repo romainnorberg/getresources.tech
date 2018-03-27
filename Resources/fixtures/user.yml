@@ -9,6 +9,13 @@ App\Entity\User:
         username: '@self->email'
         plain_password: <password()>
 
+    user_1 (extends user):
+        email: user1@example.com
+        username: user_1
+        plain_password: '12345'
+        roles:
+            - 'ROLE_USER'
+
     user_admin (extends user):
         email: obins.admin@example.com
         username: obins_admin

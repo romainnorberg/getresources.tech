@@ -7,15 +7,19 @@ use App\Tests\AppWebTestCase;
 
 class UserTest extends AppWebTestCase
 {
+
+
     /**
+     * @covers \App\Entity\User
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function testPersistSetsTimestamps()
+    public function testPersistSetsTimestamps(): void
     {
         $dateTime = new \DateTime('now');
 
-        $user = new User();
+        $user = User::create();
         $user->setUsername('example@example.com');
         $user->setEmail('example@example.com');
         $user->setPlainPassword('password');
@@ -30,33 +34,45 @@ class UserTest extends AppWebTestCase
         $this->em->flush();
     }
 
-    public function testToString()
+    /**
+     * @covers \App\Entity\User::setUsername
+     */
+    public function testToString(): void
     {
-        $user = new User();
+        $user = User::create();
 
         $user->setUsername('example');
         $this->assertEquals('example', (string)$user);
     }
 
-    public function testUsername()
+    /**
+     * @covers \App\Entity\User::setUsername
+     */
+    public function testUsername(): void
     {
-        $user = new User();
+        $user = User::create();
 
         $user->setUsername('example');
         $this->assertEquals('example', $user->getUsername());
     }
 
-    public function testEmail()
+    /**
+     * @covers \App\Entity\User::setEmail
+     */
+    public function testEmail(): void
     {
-        $user = new User();
+        $user = User::create();
 
         $user->setEmail('mail@example.org');
         $this->assertEquals('mail@example.org', $user->getEmail());
     }
 
-    public function testPassword()
+    /**
+     * @covers \App\Entity\User::setPlainPassword
+     */
+    public function testPassword(): void
     {
-        $user = new User();
+        $user = User::create();
         $this->assertNull($user->getPassword());
 
         $password = 'example';
@@ -64,9 +80,44 @@ class UserTest extends AppWebTestCase
         $this->assertNotEquals($password, $user->getPassword());
     }
 
-    public function testActivation()
+    /**
+     * @covers \App\Entity\User
+     */
+    public function testActivation(): void
     {
-        $user = new User();
+        $user = User::create();
         $this->assertTrue($user->getisActive());
+    }
+
+    /**
+     * @covers \App\Entity\User
+     */
+    public function testShouldUserHasRoleOnCreate(): void
+    {
+        $user = User::create();
+
+        $this->assertEquals(['ROLE_USER'], $user->getRoles());
+    }
+
+    /**
+     * @covers \App\Entity\User::create()
+     *
+     * @throws \ReflectionException
+     */
+    public function testShouldCreateRequireNoParameter(): void
+    {
+        $reflection = new \ReflectionMethod(User::class, 'create');
+
+        $this->assertEmpty($reflection->getParameters(), sprintf('Create method require no parameter. Actual parameters: %s', implode(', ', $reflection->getParameters())));
+    }
+
+    /**
+     * @covers \App\Entity\User::create()
+     */
+    public function testShouldCreateReturnNewUserEntity(): void
+    {
+        $user = User::create();
+
+        $this->assertInstanceOf(User::class, $user, sprintf('New instance of App\Entity\User expected, return %s', \get_class($user)));
     }
 }

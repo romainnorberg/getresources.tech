@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Utils\UserUtils;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -61,7 +62,7 @@ class User implements UserInterface, \Serializable
     private $roles = ['ROLE_USER'];
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -96,7 +97,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getId(): string
+    public function getId():? string
     {
         return $this->id;
     }
@@ -301,7 +302,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param \DateTime $lastLogin
+     * @param \DateTime|null $lastLogin
      *
      * @return User
      */
@@ -337,5 +338,18 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ] = unserialize($serialized);
+    }
+
+    /**
+     * @return UserUtils
+     */
+    public function getUtils(): UserUtils
+    {
+        return new UserUtils($this);
+    }
+
+    public static function create()
+    {
+        return new User();
     }
 }

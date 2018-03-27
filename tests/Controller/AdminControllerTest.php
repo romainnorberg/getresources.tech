@@ -8,9 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 class AdminControllerTest extends AppWebTestCase
 {
     /**
+     * @covers \App\Controller\AdminController::indexAction
+     *
      * @throws \Exception
      */
-    public function testIsSecureArea()
+    public function testIsSecureArea(): void
     {
         $url = $this->client->getContainer()->get('router')->generate('admin', []);
         $this->client->request('GET', $url);
@@ -22,9 +24,11 @@ class AdminControllerTest extends AppWebTestCase
     }
 
     /**
+     * @covers \App\Controller\AdminController::indexAction
+     *
      * @throws \Exception
      */
-    public function testIsSecureAreaWithRoleSuperAdmin()
+    public function testIsSecureAreaWithRoleSuperAdmin(): void
     {
         $this->logIn();
 
@@ -43,9 +47,11 @@ class AdminControllerTest extends AppWebTestCase
     }
 
     /**
+     * @covers \App\Controller\AdminController::indexAction
+     *
      * @throws \Exception
      */
-    public function testIsSuperSecureAreaWithRoleAdmin()
+    public function testIsSuperSecureAreaWithRoleAdmin(): void
     {
         $this->logIn('obins_admin'); // user with role 'ROLE_ADMIN' (not super)
 

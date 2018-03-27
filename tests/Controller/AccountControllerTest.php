@@ -7,7 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AccountControllerTest extends AppWebTestCase
 {
-    public function testIsSecureArea()
+    /**
+     * @covers \App\Controller\AccountController::indexAction
+     */
+    public function testIsSecureArea(): void
     {
         $url = $this->client->getContainer()->get('router')->generate('account', []);
         $this->client->request('GET', $url);
