@@ -7,6 +7,8 @@ use App\Tests\AppWebTestCase;
 
 class UserTest extends AppWebTestCase
 {
+
+
     /**
      * @covers \App\Entity\User
      *
@@ -17,7 +19,7 @@ class UserTest extends AppWebTestCase
     {
         $dateTime = new \DateTime('now');
 
-        $user = new User();
+        $user = User::create();
         $user->setUsername('example@example.com');
         $user->setEmail('example@example.com');
         $user->setPlainPassword('password');
@@ -37,7 +39,7 @@ class UserTest extends AppWebTestCase
      */
     public function testToString(): void
     {
-        $user = new User();
+        $user = User::create();
 
         $user->setUsername('example');
         $this->assertEquals('example', (string)$user);
@@ -48,7 +50,7 @@ class UserTest extends AppWebTestCase
      */
     public function testUsername(): void
     {
-        $user = new User();
+        $user = User::create();
 
         $user->setUsername('example');
         $this->assertEquals('example', $user->getUsername());
@@ -59,7 +61,7 @@ class UserTest extends AppWebTestCase
      */
     public function testEmail(): void
     {
-        $user = new User();
+        $user = User::create();
 
         $user->setEmail('mail@example.org');
         $this->assertEquals('mail@example.org', $user->getEmail());
@@ -70,7 +72,7 @@ class UserTest extends AppWebTestCase
      */
     public function testPassword(): void
     {
-        $user = new User();
+        $user = User::create();
         $this->assertNull($user->getPassword());
 
         $password = 'example';
@@ -83,7 +85,39 @@ class UserTest extends AppWebTestCase
      */
     public function testActivation(): void
     {
-        $user = new User();
+        $user = User::create();
         $this->assertTrue($user->getisActive());
+    }
+
+    /**
+     * @covers \App\Entity\User
+     */
+    public function testShouldUserHasRoleOnCreate(): void
+    {
+        $user = User::create();
+
+        $this->assertEquals(['ROLE_USER'], $user->getRoles());
+    }
+
+    /**
+     * @covers \App\Entity\User::create()
+     *
+     * @throws \ReflectionException
+     */
+    public function testShouldCreateRequireNoParameter(): void
+    {
+        $reflection = new \ReflectionMethod(User::class, 'create');
+
+        $this->assertEmpty($reflection->getParameters(), sprintf('Create method require no parameter. Actual parameters: %s', implode(', ', $reflection->getParameters())));
+    }
+
+    /**
+     * @covers \App\Entity\User::create()
+     */
+    public function testShouldCreateReturnNewUserEntity(): void
+    {
+        $user = User::create();
+
+        $this->assertInstanceOf(User::class, $user, sprintf('New instance of App\Entity\User expected, return %s', \get_class($user)));
     }
 }

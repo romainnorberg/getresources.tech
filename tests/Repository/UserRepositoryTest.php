@@ -30,7 +30,7 @@ class UserRepositoryTest extends WebTestCase
     }
 
     /**
-     * @dataProvider usernameProvider
+     * @dataProvider loadUserByUsernameProvider
      * @covers       \App\Repository\UserRepository::loadUserByUsername
      *
      * @param string $username
@@ -47,9 +47,81 @@ class UserRepositoryTest extends WebTestCase
         $this->assertEquals('jmalkovich', $user->getUsername());
     }
 
-    public function usernameProvider()
+    public function loadUserByUsernameProvider()
     {
         yield ['jmalkovich']; // username
         yield ['john@malkovich.com']; // email
+    }
+
+    /**
+     * @dataProvider createIfNotExistExistingUserProvider
+     *
+     * @param string $username
+     *
+     * @throws NonUniqueResultException
+     */
+    public function testCreateIfNotExistShouldReturnExistingUser(string $username): void
+    {
+        $user = $this->repository->createIfNotExist($username);
+
+        $this->assertNotEmpty($user->getId());
+    }
+
+    public function createIfNotExistExistingUserProvider()
+    {
+        // existing username
+        yield ['jmalkovich'];
+
+        // existing email
+        yield ['john@malkovich.com'];
+    }
+
+    /**
+     * @dataProvider createIfNotExistUnknownUserProvider
+     *
+     * @param string $username
+     *
+     * @throws NonUniqueResultException
+     */
+    public function testCreateIfNotExistShouldReturnNewUser(string $username): void
+    {
+        $user = $this->repository->createIfNotExist($username);
+
+        $this->assertNull($user->getId());
+    }
+
+    public function createIfNotExistUnknownUserProvider()
+    {
+        // Unknown username
+        yield ['sjobs'];
+
+        // Unknown email
+        yield ['sj@apple.com'];
+    }
+
+    /**
+     * @expectedException \Doctrine\DBAL\Exception\NotNullConstraintViolationException
+     * @throws NonUniqueResultException
+     */
+    public function testSaveWithoutPasswordShouldReturnException(): void
+    {
+        $newUser = $this->repository->createIfNotExist('benharper');
+        $this->repository->save($newUser);
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function testSaveShouldEntityManagerContainsFakeUsername(): void
+    {
+        $faker = \Faker\Factory::create();
+
+        $newUser = $this->repository->createIfNotExist($faker->userName);
+        $newUser->setEmail($faker->email);
+        $newUser->setPlainPassword($faker->password);
+
+        $newUser = $this->repository->save($newUser);
+
+        $this->assertTrue($this->em->contains($newUser));
     }
 }

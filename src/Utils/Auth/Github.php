@@ -3,6 +3,7 @@
 namespace App\Utils\Auth;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
 class Github
 {
@@ -22,7 +23,7 @@ class Github
      */
     private $client;
 
-    public function __construct(Client $client)
+    public function __construct(ClientInterface $client)
     {
         $this->authClientId = $_ENV['AUTH_GITHUB_CLIENT_ID'];
         $this->authClientSecret = $_ENV['AUTH_GITHUB_CLIENT_SECRET'];

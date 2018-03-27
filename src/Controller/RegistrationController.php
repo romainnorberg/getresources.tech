@@ -7,7 +7,6 @@ use App\Entity\User;
 use App\Vo\UserRegistrationProcessorVo;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Enqueue\Client\Message;
 use Enqueue\Client\Producer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
