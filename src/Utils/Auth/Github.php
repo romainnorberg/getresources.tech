@@ -25,9 +25,9 @@ class Github
 
     public function __construct(ClientInterface $client)
     {
-        $this->authClientId = $_ENV['AUTH_GITHUB_CLIENT_ID'];
-        $this->authClientSecret = $_ENV['AUTH_GITHUB_CLIENT_SECRET'];
-        $this->authCallbackUrl = $_ENV['AUTH_GITHUB_CALLBACK_URL_PROTOCOL'] . $_ENV['AUTH_GITHUB_CALLBACK_URL'];
+        $this->authClientId = getenv('AUTH_GITHUB_CLIENT_ID');
+        $this->authClientSecret = getenv('AUTH_GITHUB_CLIENT_SECRET');
+        $this->authCallbackUrl = getenv('AUTH_GITHUB_CALLBACK_URL_PROTOCOL') . getenv('AUTH_GITHUB_CALLBACK_URL');
 
         $this->client = $client;
     }

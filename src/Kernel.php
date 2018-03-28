@@ -25,11 +25,12 @@ class Kernel extends BaseKernel
         $this->addRollbar($environment);
 
         parent::__construct($environment, $debug);
+
     }
 
     private function addRollbar($environment)
     {
-        if (isset($_ENV['ROLLBAR_ACCESS_TOKEN']) && !\in_array($environment, ['test'], true)) {
+        if ($environment && 'test' !== $environment && null !== getenv('ROLLBAR_ACCESS_TOKEN')) {
             $config = [
                 'environment' => $environment,
             ];
