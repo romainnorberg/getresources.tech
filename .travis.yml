@@ -60,6 +60,7 @@ script:
   - php ./vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.xml --stderr -v
 
 after_success:
+  - sudo kill -9 $(ps aux | grep 'redis-server' | awk '{print $2}') # killing background process
   - bash <(curl -s https://codecov.io/bash)
 
 # After a build, send email notification with the build results
