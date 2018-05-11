@@ -30,13 +30,13 @@
       span.tag
         height: 59px
         color: #fff
-        background-color: hsl(171, 100%, 45%)
+        background-color: darken($secondary, 20%)
         font-size: 1em
         font-weight: 500
 
     input[type="search"]
       width: 100%
-      color: rgb(255, 255, 255)
+      color: $grey-dark
       font-size: 60px
       font-weight: 300
       text-align: left
@@ -48,7 +48,7 @@
       -moz-appearance: textfield
       -webkit-appearance: textfield
       appearance: textfield
-      background: hsl(171, 100%, 39%) no-repeat center right 16px
+      background: $secondary no-repeat center right 16px
       background-size: 30px
       border-radius: 4px
 
@@ -86,7 +86,7 @@
       display: none
       width: 100%
       position: absolute
-      background-color: rgba(0, 209, 178, .7)
+      background-color: lighten($secondary, 20%)
       -webkit-backdrop-filter: blur(20px)
       backdrop-filter: blur(20px)
       border-bottom: 2px solid rgba(255, 255, 255, .7)
@@ -130,7 +130,7 @@
 
       &:hover
         span.tag.is-light
-          background-color: hsl(171, 100%, 55%)
+          background-color: darken($primary, 10%)
           span.has-text-primary
             color: white !important
 
