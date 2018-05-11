@@ -4,8 +4,8 @@ doctrine:
         connections:
             default:
                 driver: 'pdo_mysql'
-                server_version: '5.7'
-                charset: utf8mb4
+                server_version: '5.6'
+                charset: utf8
                 url: '%env(MYSQL_ADDON_URI)%'
                 host: '%env(MYSQL_ADDON_HOST)%'
                 port: '%env(MYSQL_ADDON_PORT)%'
