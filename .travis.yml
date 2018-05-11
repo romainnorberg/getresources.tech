@@ -34,7 +34,6 @@ cache:
 # Update composer
 before_install:
   - echo "extension=redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini # https://blog.travis-ci.com/2013-03-08-preinstalled-php-extensions / https://docs.travis-ci.com/user/languages/php/#PHP-extensions
-  - sudo echo never > /sys/kernel/mm/transparent_hugepage/enabled # Transparent Huge Pages (THP) support disabled. This will create latency and memory usage issues with Redis
   - composer self-update
   - composer clear-cache
 
