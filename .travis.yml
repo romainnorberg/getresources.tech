@@ -20,10 +20,11 @@ env:
   global:
     - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-ansi --no-progress --no-suggest"
 
-# Host (https://docs.travis-ci.com/user/hosts)
 addons:
   hosts:
-    - getresources.local
+    - getresources.local # Host (https://docs.travis-ci.com/user/hosts)
+  apt:
+    update: true
 
 # Cache composer packages so "composer install" is faster
 cache:
@@ -46,6 +47,8 @@ install:
 
 before_script:
   - echo `pwd`
+  - mysql -u root -e "SHOW VARIABLES LIKE '%version%';"
+  - mysql -u root -e "SHOW ENGINES;"
   - mysql -u root -e "CREATE DATABASE \`${MYSQL_ADDON_DB}\`;"
   - sudo redis-server --port ${REDIS_PORT} --requirepass ${REDIS_PASSWORD}& # slap a & at the end of the line, and the process will be forked into the background
   - php bin/console doctrine:schema:create
