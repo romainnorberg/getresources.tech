@@ -3,7 +3,7 @@
         "@symfony/webpack-encore": "0.20.1",
         "node-sass": "4.9.0",
         "sass-loader": "7.1.0",
-        "webpack-notifier": "1.6.0"
+        "webpack-notifier": "1.7.0"
     },
     "license": "UNLICENSED",
     "private": true,
